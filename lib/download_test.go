@@ -9,7 +9,7 @@ import (
 	"runtime"
 	"testing"
 
-	lib "github.com/warrensbox/gitapp-installer/lib"
+	lib "github.com/warrensbox/github-appinstaller/lib"
 )
 
 // TestDownloadFromURL_FileNameMatch : Check expected filename exist when downloaded

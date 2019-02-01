@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: circleci/golang:1.10
 
-    working_directory: /go/src/github.com/warrensbox/gitapp-installer
+    working_directory: /go/src/github.com/warrensbox/github-appinstaller
 
     steps:
       - checkout

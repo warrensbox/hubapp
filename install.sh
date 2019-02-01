@@ -11,7 +11,7 @@ Usage: $this [-b] bindir [-d] [tag]
   -b sets bindir or installation directory, Defaults to ./bin
   -d turns on debug logging
    [tag] is a tag from
-   https://github.com/warrensbox/gitapp-installer/releases
+   https://github.com/warrensbox/github-appinstaller/releases
    If tag is missing, then the latest will be used.
 
 EOF
@@ -334,9 +334,9 @@ End of functions from https://github.com/client9/shlib
 ------------------------------------------------------------------------
 EOF
 
-PROJECT_NAME="gitapp-installer"
+PROJECT_NAME="github-appinstaller"
 OWNER=warrensbox
-REPO="gitapp-installer"
+REPO="github-appinstaller"
 BINARY=tgswitch
 FORMAT=tar.gz
 OS=$(uname_os)

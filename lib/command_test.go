@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/warrensbox/gitapp-installer/lib"
+	"github.com/warrensbox/github-appinstaller/lib"
 )
 
 // TestNewCommand : pass value and check if returned value is a pointer

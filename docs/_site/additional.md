@@ -13,7 +13,7 @@ brew upgrade warrensbox/tap/tgswitch
 Rerun:
 
 ```sh
-curl -L https://raw.githubusercontent.com/warrensbox/gitapp-installer/release/install.sh | bash
+curl -L https://raw.githubusercontent.com/warrensbox/github-appinstaller/release/install.sh | bash
 ```
 
 ## Uninstall:

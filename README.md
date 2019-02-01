@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/warrensbox/gitapp-installer.svg?branch=master)](https://travis-ci.org/warrensbox/gitapp-installer)
-[![Go Report Card](https://goreportcard.com/badge/github.com/warrensbox/gitapp-installer)](https://goreportcard.com/report/github.com/warrensbox/gitapp-installer)
-[![CircleCI](https://circleci.com/gh/warrensbox/gitapp-installer/tree/master.svg?style=shield&circle-token=d74b0de145c45b1d0da97f817363c77350e1a121)](https://circleci.com/gh/warrensbox/gitapp-installer)
+[![Build Status](https://travis-ci.org/warrensbox/github-appinstaller.svg?branch=master)](https://travis-ci.org/warrensbox/github-appinstaller)
+[![Go Report Card](https://goreportcard.com/badge/github.com/warrensbox/github-appinstaller)](https://goreportcard.com/report/github.com/warrensbox/github-appinstaller)
+[![CircleCI](https://circleci.com/gh/warrensbox/github-appinstaller/tree/master.svg?style=shield&circle-token=d74b0de145c45b1d0da97f817363c77350e1a121)](https://circleci.com/gh/warrensbox/github-appinstaller)
 
 # Terragrunt Switcher 
 
@@ -13,7 +13,7 @@ The installation is minimal and easy.
 Once installed, simply select the version you require from the dropdown and start using terragrunt. 
 
 
-See installation guide here: [tgswitch installation](https://warrensbox.github.io/gitapp-installer/)
+See installation guide here: [tgswitch installation](https://warrensbox.github.io/github-appinstaller/)
 
 ## Installation
 
@@ -33,12 +33,12 @@ brew install warrensbox/tap/tgswitch
 Installation for other linux operation systems.
 
 ```sh
-curl -L https://raw.githubusercontent.com/warrensbox/gitapp-installer/release/install.sh | bash
+curl -L https://raw.githubusercontent.com/warrensbox/github-appinstaller/release/install.sh | bash
 ```
 
 ### Install from source
 
-Alternatively, you can install the binary from source [here](https://github.com/warrensbox/gitapp-installer/releases) 
+Alternatively, you can install the binary from source [here](https://github.com/warrensbox/github-appinstaller/releases) 
 
 ## How to use:
 ### Use dropdown menu to select version
@@ -59,9 +59,9 @@ The most recently selected versions are presented at the top of the dropdown.
 
 ## Additional Info
 
-See how to *upgrade*, *uninstall*, *troubleshoot* here:[More info](https://warrensbox.github.io/gitapp-installer/additional)
+See how to *upgrade*, *uninstall*, *troubleshoot* here:[More info](https://warrensbox.github.io/github-appinstaller/additional)
 
 
 ## Issues
 
-Please open  *issues* here:  [New Issue](https://github.com/warrensbox/gitapp-installer/issues)
+Please open  *issues* here:  [New Issue](https://github.com/warrensbox/github-appinstaller/issues)

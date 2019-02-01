@@ -59,7 +59,7 @@ brew:
 
   # Your app's homepage.
   # Default is empty.
-  homepage: "https://warrensbox.github.io/gitapp-installer"
+  homepage: "https://warrensbox.github.io/github-appinstaller"
 
   # Your app's description.
   # Default is empty.

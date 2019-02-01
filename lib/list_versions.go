@@ -308,7 +308,7 @@ func getAppBody(gruntURLPage string, ch chan<- *[]modal.Repo) {
 		log.Fatal(err)
 	}
 
-	req.Header.Set("User-Agent", "gitapp-installer")
+	req.Header.Set("User-Agent", "github-appinstaller")
 
 	res, getErr := gswitch.Do(req)
 	if getErr != nil {

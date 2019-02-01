@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/warrensbox/gitapp-installer/lib"
+	"github.com/warrensbox/github-appinstaller/lib"
 )
 
 // TestRenameFile : Create a file, check filename exist,
