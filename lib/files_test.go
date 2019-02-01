@@ -20,9 +20,9 @@ import (
 // rename file, check new filename exit
 func TestRenameFile(t *testing.T) {
 
-	installFile := "terragrunt"
-	installVersion := "terragrunt_"
-	installPath := "/.terragrunt.versions_test/"
+	installFile := "appinstall"
+	installVersion := "appinstall_"
+	installPath := "/.appinstall.versions_test/"
 	version := "0.0.7"
 
 	usr, errCurr := user.Current()
@@ -65,8 +65,8 @@ func TestRenameFile(t *testing.T) {
 // remove file, check file does not exist
 func TestRemoveFiles(t *testing.T) {
 
-	installFile := "terragrunt"
-	installPath := "/.terragrunt.versions_test/"
+	installFile := "appinstall"
+	installPath := "/.appinstall.versions_test/"
 
 	usr, errCurr := user.Current()
 	if errCurr != nil {
@@ -100,7 +100,7 @@ func TestRemoveFiles(t *testing.T) {
 // TestCreateDirIfNotExist : Create a directory, check directory exist
 func TestCreateDirIfNotExist(t *testing.T) {
 
-	installPath := "/.terragrunt.versions_test/"
+	installPath := "/.appinstall.versions_test/"
 
 	usr, errCurr := user.Current()
 	if errCurr != nil {
@@ -133,7 +133,7 @@ func TestCreateDirIfNotExist(t *testing.T) {
 //TestWriteLines : write to file, check readline to verify
 func TestWriteLines(t *testing.T) {
 
-	installPath := "/.terragrunt.versions_test/"
+	installPath := "/.appinstall.versions_test/"
 	recentFile := "RECENT"
 	semverRegex := regexp.MustCompile(`\A\d+(\.\d+){2}\z`)
 
@@ -202,7 +202,7 @@ func TestWriteLines(t *testing.T) {
 
 // TestReadLines : read from file, check write to verify
 func TestReadLines(t *testing.T) {
-	installPath := "/.terragrunt.versions_test/"
+	installPath := "/.appinstall.versions_test/"
 	recentFile := "RECENT"
 	semverRegex := regexp.MustCompile(`\A\d+(\.\d+){2}\z`)
 
@@ -258,7 +258,7 @@ func TestIsDirEmpty(t *testing.T) {
 
 	current := time.Now()
 
-	installPath := "/.terragrunt.versions_test/"
+	installPath := "/.appinstall.versions_test/"
 
 	usr, errCurr := user.Current()
 	if errCurr != nil {
@@ -294,8 +294,8 @@ func TestCheckDirHasTGBin(t *testing.T) {
 
 	goarch := runtime.GOARCH
 	goos := runtime.GOOS
-	installPath := "/.terragrunt.versions_test/"
-	installFile := "terragrunt"
+	installPath := "/.appinstall.versions_test/"
+	installFile := "appinstall"
 
 	usr, errCurr := user.Current()
 	if errCurr != nil {

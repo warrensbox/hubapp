@@ -15,9 +15,9 @@ import (
 // TestDownloadFromURL_FileNameMatch : Check expected filename exist when downloaded
 func TestDownloadFromURL_FileNameMatch(t *testing.T) {
 
-	gruntURL := "https://github.com/gruntwork-io/terragrunt/releases/download/"
-	installVersion := "terragrunt_"
-	installPath := "/.terragrunt.versions_test/"
+	gruntURL := "https://github.com/gruntwork-io/appinstall/releases/download/"
+	installVersion := "appinstall_"
+	installPath := "/.appinstall.versions_test/"
 	goarch := runtime.GOARCH
 	goos := runtime.GOOS
 
@@ -30,17 +30,17 @@ func TestDownloadFromURL_FileNameMatch(t *testing.T) {
 	fmt.Printf("Current user: %v \n", usr.HomeDir)
 	installLocation := usr.HomeDir + installPath
 
-	// create /.terragrunt.versions_test/ directory to store code
+	// create /.appinstall.versions_test/ directory to store code
 	if _, err := os.Stat(installLocation); os.IsNotExist(err) {
-		log.Printf("Creating directory for terragrunt: %v", installLocation)
+		log.Printf("Creating directory for appinstall: %v", installLocation)
 		err = os.MkdirAll(installLocation, 0755)
 		if err != nil {
-			fmt.Printf("Unable to create directory for terragrunt: %v", installLocation)
+			fmt.Printf("Unable to create directory for appinstall: %v", installLocation)
 			panic(err)
 		}
 	}
 
-	/* test download lowest terragrunt version */
+	/* test download lowest appinstall version */
 	lowestVersion := "0.13.9"
 
 	url := gruntURL + "v" + lowestVersion + "/" + installVersion + goos + "_" + goarch
@@ -57,7 +57,7 @@ func TestDownloadFromURL_FileNameMatch(t *testing.T) {
 		t.Error("Download file mismatches expected file")
 	}
 
-	/* test download latest terragrunt version */
+	/* test download latest appinstall version */
 	latestVersion := "0.14.11"
 
 	url = gruntURL + "v" + latestVersion + "/" + installVersion + goos + "_" + goarch
@@ -80,9 +80,9 @@ func TestDownloadFromURL_FileNameMatch(t *testing.T) {
 // TestDownloadFromURL_FileExist : Check expected file exist when downloaded
 func TestDownloadFromURL_FileExist(t *testing.T) {
 
-	gruntURL := "https://github.com/gruntwork-io/terragrunt/releases/download/"
-	installVersion := "terragrunt_"
-	installPath := "/.terragrunt.versions_test/"
+	gruntURL := "https://github.com/gruntwork-io/appinstall/releases/download/"
+	installVersion := "appinstall_"
+	installPath := "/.appinstall.versions_test/"
 	goarch := runtime.GOARCH
 	goos := runtime.GOOS
 
@@ -95,17 +95,17 @@ func TestDownloadFromURL_FileExist(t *testing.T) {
 	fmt.Printf("Current user: %v \n", usr.HomeDir)
 	installLocation := usr.HomeDir + installPath
 
-	// create /.terragrunt.versions_test/ directory to store code
+	// create /.appinstall.versions_test/ directory to store code
 	if _, err := os.Stat(installLocation); os.IsNotExist(err) {
-		log.Printf("Creating directory for terragrunt: %v", installLocation)
+		log.Printf("Creating directory for appinstall: %v", installLocation)
 		err = os.MkdirAll(installLocation, 0755)
 		if err != nil {
-			fmt.Printf("Unable to create directory for terragrunt: %v", installLocation)
+			fmt.Printf("Unable to create directory for appinstall: %v", installLocation)
 			panic(err)
 		}
 	}
 
-	/* test download lowest terragrunt version */
+	/* test download lowest appinstall version */
 	lowestVersion := "0.13.9"
 
 	url := gruntURL + "v" + lowestVersion + "/" + installVersion + goos + "_" + goarch
@@ -122,7 +122,7 @@ func TestDownloadFromURL_FileExist(t *testing.T) {
 		t.Error("Downoad file mismatches expected file")
 	}
 
-	/* test download latest terragrunt version */
+	/* test download latest appinstall version */
 	latestVersion := "0.14.11"
 
 	url = gruntURL + "v" + latestVersion + "/" + installVersion + goos + "_" + goarch
@@ -144,7 +144,7 @@ func TestDownloadFromURL_FileExist(t *testing.T) {
 
 func TestDownloadFromURL_Valid(t *testing.T) {
 
-	gruntURL := "https://github.com/gruntwork-io/terragrunt/releases/download/"
+	gruntURL := "https://github.com/gruntwork-io/appinstall/releases/download/"
 
 	url, err := url.ParseRequestURI(gruntURL)
 	if err != nil {

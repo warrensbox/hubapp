@@ -1,15 +1,15 @@
-# Terragrunt Switcher 
+# appinstall Switcher 
 
-The `tgswitch` command line tool lets you switch between different versions of [terragrunt](https://www.terragrunt.io/){:target="_blank"}. 
-If you do not have a particular version of terragrunt installed, `tgswitch` will download the version you desire.
+The `appinstall` command line tool lets you switch between different versions of [appinstall](https://www.appinstall.io/){:target="_blank"}. 
+If you do not have a particular version of appinstall installed, `appinstall` will download the version you desire.
 The installation is minimal and easy. 
-Once installed, simply select the version you require from the dropdown and start using terragrunt. 
+Once installed, simply select the version you require from the dropdown and start using appinstall. 
 
 <hr>
 
 ## Installation
 
-`tgswitch` is available for MacOS and Linux based operating systems.
+`appinstall` is available for MacOS and Linux based operating systems.
 
 ### Homebrew
 
@@ -17,7 +17,7 @@ Installation for MacOS is the easiest with Homebrew. [If you do not have homebre
 
 
 ```ruby
-brew install warrensbox/tap/tgswitch
+brew install warrensbox/tap/appinstall
 ```
 
 ### Linux
@@ -36,19 +36,19 @@ Alternatively, you can install the binary from the source [here](https://github.
 
 ## How to use:
 ### Use dropdown menu to select version
-<img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/tgswitch/tgswitch.gif" alt="drawing" style="width: 480px;"/>
+<img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall.gif" alt="drawing" style="width: 480px;"/>
 
-1.  You can switch between different versions of terragrunt by typing the command `tgswitch` on your terminal. 
-2.  Select the version of terragrunt you require by using the up and down arrow.
+1.  You can switch between different versions of appinstall by typing the command `appinstall` on your terminal. 
+2.  Select the version of appinstall you require by using the up and down arrow.
 3.  Hit **Enter** to select the desired version.
 
 The most recently selected versions are presented at the top of the dropdown.
 
 ### Supply version on command line
-<img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/tgswitch/tgswitch-v4.gif" alt="drawing" style="width: 480px;"/>
+<img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall-v4.gif" alt="drawing" style="width: 480px;"/>
 
 1. You can also supply the desired version as an argument on the command line.
-2. For example, `tgswitch 0.10.5` for version 0.10.5 of terragrunt.
+2. For example, `appinstall 0.10.5` for version 0.10.5 of appinstall.
 3. Hit **Enter** to switch.
 
 <hr>

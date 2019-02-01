@@ -4,7 +4,7 @@ builds:
   - ldflags:
     - -s -w -X "main.version={{.Env.RELEASE_VERSION}}"
   - main: main.go
-    binary: tgswitch
+    binary: appinstall 
     goos:
       - windows
       - darwin
@@ -32,7 +32,7 @@ archive:
 brew:
   # Name of the recipe
   # Default to project name
-  name: tgswitch
+  name: appinstall
 
   # Reporitory to push the tap to.
   github:
@@ -55,15 +55,15 @@ brew:
 
   # Caveats for the user of your binary.
   # Default is empty.
-  caveats: "Type 'tgswitch' on your command line and choose the terragrunt version that you want from the dropdown. This command currently only works on MacOs and Linux"
+  caveats: "Type 'appinstall install user/repo' on your command line and choose the app version that you want from the dropdown from the GitHub repo. This command currently only works on MacOs and Linux"
 
   # Your app's homepage.
   # Default is empty.
-  homepage: "https://warrensbox.github.io/github-appinstaller"
+  homepage: "https://warrensbox.github.io/github-appinstall"
 
   # Your app's description.
   # Default is empty.
-  description: "The tgswitch command lets you switch between terragrunt versions."
+  description: "The appinstall command lets you install binary application from github."
 
   # Setting this will prevent goreleaser to actually try to commit the updated
   # formula - instead, the formula file will be stored on the dist folder only,
@@ -73,15 +73,14 @@ brew:
 
   # Packages that conflict with your package.
   # conflicts:
-  #   - terragrunt
 
   # So you can `brew test` your formula.
   # Default is empty.
   test: |
-    system "#{bin}/tgswitch --version"
+    system "#{bin}/appinstall --version"
 
   # Custom install script for brew.
   # Default is 'bin.install "program"'.
   install: |
-    bin.install "tgswitch"
+    bin.install "appinstall"
 

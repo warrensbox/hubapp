@@ -93,8 +93,12 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	for _, file := range filesExist {
 		fmt.Println("File exist")
+		fmt.Println(file)
+		fmt.Println(appversion)
+
 		if matchedFile, _ := regexp.MatchString(appversion, file); matchedFile {
 			fileExist = true
+			fmt.Println(matchedFile)
 		}
 	}
 
@@ -155,7 +159,6 @@ func AddRecent(requestedVersion string, installLocation string) {
 
 		for _, line := range lines {
 			if !semverRegex.MatchString(line) {
-				fmt.Println("file corrupted")
 				RemoveFiles(installLocation + recentFile)
 				CreateRecentFile(requestedVersion)
 				return

@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	gruntURL = "https://api.github.com/repos/gruntwork-io/terragrunt/releases"
+	gruntURL = "https://api.github.com/repos/gruntwork-io/appinstall/releases"
 )
 
 // TestGetAppList : Get list from github

@@ -145,7 +145,7 @@ func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
 
 	for _, num := range repo {
 		if num.Prerelease == false && num.Draft == false {
-			semverRegex := regexp.MustCompile(`\v\d+(\.\d+){2}\z`)
+			semverRegex := regexp.MustCompile(`\d+(\.\d+){2}\z`)
 			if semverRegex.MatchString(num.TagName) {
 				trimstr := strings.Trim(num.TagName, "v")
 				latestVersion = trimstr
@@ -156,11 +156,13 @@ func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
 
 	}
 
+	fmt.Printf("The latest version is %s", latestVersion)
+
 	if latestVersion != "" {
-		return latestVersion, repo, errors.New("Unable to get latest version")
+		return latestVersion, repo, nil
 	}
 
-	return "", repo, nil
+	return "", repo, errors.New("Unable to get latest version")
 }
 
 //GetAppList :  Get the list of available app versions

@@ -20,7 +20,7 @@ src
 main
 build
 dist
-tgswitch
+appinstall
 
 .DS_Store
 

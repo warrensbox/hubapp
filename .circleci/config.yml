@@ -15,11 +15,11 @@ jobs:
       - run: go vet -tests=false ./...
       - run: go test -v ./...
       - run: mkdir -p build
-      - run: go build -v -o build/tgswitch
+      - run: go build -v -o build/appinstall
 
       - persist_to_workspace:
           root: build
-          paths: tgswitch
+          paths: appinstall
 
   test-ubuntu:
     docker:

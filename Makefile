@@ -1,4 +1,4 @@
-EXE  := tgswitch
+EXE  := appinstall
 PKG  := github.com/warrensbox/github-appinstaller
 VER := $(shell git ls-remote --tags git://github.com/warrensbox/github-appinstaller | awk '{print $$2}'| awk -F"/" '{print $$3}' | sort -n -t. -k1,1 -k2,2 -k3,3 | tail -n 1)
 PATH := build:$(PATH)

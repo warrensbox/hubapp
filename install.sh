@@ -5,7 +5,7 @@ set -e
 usage() {
   this=$1
   cat <<EOF
-$this: download go binaries for warrensbox/tgswitch
+$this: download go binaries for warrensbox/appinstall
 
 Usage: $this [-b] bindir [-d] [tag]
   -b sets bindir or installation directory, Defaults to ./bin
@@ -46,7 +46,7 @@ execute() {
   srcdir="${tmpdir}"
   (cd "${tmpdir}" && untar "${TARBALL}")
   install -d "${BINDIR}"
-  for binexe in "tgswitch" ; do
+  for binexe in "appinstall" ; do
     if [ "$OS" = "windows" ]; then
       binexe="${binexe}.exe"
     fi
@@ -337,7 +337,7 @@ EOF
 PROJECT_NAME="github-appinstaller"
 OWNER=warrensbox
 REPO="github-appinstaller"
-BINARY=tgswitch
+BINARY=appinstall
 FORMAT=tar.gz
 OS=$(uname_os)
 ARCH=$(uname_arch)

@@ -9,7 +9,7 @@ package main
 /*
 * 1- Make GET call to receive release json from github
 * 2- Download released app from archive
-* 3- Rename the file from `terragrunt` to `terragrunt_version`
+* 3- Rename the file from `appinstall` to `appinstall_version`
 * 4- Read the existing symlink for app (Check if it's a homebrew symlink)
 * 6- Remove that symlink (Check if it's a homebrew symlink)
 * 7- Create new symlink to binary  `github app`
@@ -21,7 +21,6 @@ import (
 	"os"
 
 	"github.com/manifoldco/promptui"
-	"github.com/pborman/getopt"
 	"github.com/warrensbox/github-appinstaller/lib"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
@@ -102,10 +101,4 @@ func main() {
 	default:
 		fmt.Println("Unknown action. See help. Ex: appinstall --help")
 	}
-}
-
-func usageMessage() {
-	fmt.Print("\n\n")
-	getopt.PrintUsage(os.Stderr)
-	fmt.Println("Supply the terragrunt version as an argument, or choose from a menu")
 }

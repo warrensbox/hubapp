@@ -6,7 +6,7 @@
 ### Homebrew
 
 ```ruby
-brew upgrade warrensbox/tap/tgswitch
+brew upgrade warrensbox/tap/appinstall
 ```
 ### Linux
 
@@ -21,14 +21,14 @@ curl -L https://raw.githubusercontent.com/warrensbox/github-appinstaller/release
 ### Homebrew
 
 ```ruby
-brew uninstall warrensbox/tap/tgswitch
+brew uninstall warrensbox/tap/appinstall
 ```
 ### Linux
 
 Rerun:
 
 ```sh
-rm /usr/local/bin/tgswitch
+rm /usr/local/bin/appinstall
 ```
 
 ## Troubleshoot:
@@ -45,7 +45,7 @@ install: can't change permissions of /usr/local/bin: Operation not permitted
 ```ruby
 "Unable to create symlink. You must have SUDO privileges"
 ```
-You probably need to have **sudo** privileges to install *tgswitch*.
+You probably need to have **sudo** privileges to install *appinstall*.
 
 [Back to top](#upgrade)    
 [Back to main](index)
