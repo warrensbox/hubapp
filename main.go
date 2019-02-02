@@ -17,10 +17,10 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"github.com/manifoldco/promptui"
+	simplelogger "github.com/mmmorris1975/simple-logger"
 	"github.com/warrensbox/github-appinstaller/lib"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
@@ -32,10 +32,12 @@ const (
 var version = "0.1.0\n"
 
 var (
+	debugFlag   *bool
 	versionFlag *bool
 	helpFlag    *bool
 	action      *string
 	giturl      *string
+	log         *simplelogger.Logger
 )
 
 func init() {
@@ -45,11 +47,17 @@ func init() {
 		versionFlagDesc = "Displays the version of appinstall"
 		actionArgDesc   = "Provide action needed. Ex: install, update, or uninstall"
 		giturlArgDesc   = "Provide giturl in user/repo format. Ex: warrensbox/aws-find"
+		debugFlagDesc   = "Provide debug output"
 	)
 
+	debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
 	versionFlag = kingpin.Flag("version", versionFlagDesc).Short('v').Bool()
 	action = kingpin.Arg("action", actionArgDesc).Required().String()
 	giturl = kingpin.Arg("user/repo", giturlArgDesc).Required().String()
+
+	log = simplelogger.StdLogger
+	log.SetLevel(simplelogger.INFO)
+	log.SetFlags(0)
 
 }
 
@@ -59,9 +67,13 @@ func main() {
 	kingpin.Parse()
 	apiURL := fmt.Sprintf(APIURL, *giturl)
 
+	if *debugFlag {
+		log.SetLevel(simplelogger.DEBUG)
+	}
+
 	switch *action {
 	case "install":
-		fmt.Println("You said install") //remove later
+		log.Debug("Action -> install")
 		ghlist, assets := lib.GetAppList(apiURL)
 		recentVersions, _ := lib.GetRecentVersions()
 		ghlist = append(recentVersions, ghlist...)
@@ -84,18 +96,18 @@ func main() {
 		lib.AddRecent(ghversion, installLocation)
 
 	case "update":
-		fmt.Println("You said update") //remove later
+		log.Debug("Action -> update")
 
 		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL)
 		if err != nil {
-			fmt.Println(err)
+			log.Error("Could not get the latest version. Trying `appinstalll install user/repo`")
 			os.Exit(1)
 		}
 		installLocation := lib.Install(*giturl, latestVersion, assets)
 		lib.AddRecent(latestVersion, installLocation)
 
 	case "uninstall":
-		fmt.Println("You said uninstall") //remove later
+		log.Debug("Action -> uninstall") //remove later
 		installLocation := lib.Uninstall(*giturl)
 		lib.RemoveContents(installLocation)
 	default:
