@@ -10,6 +10,7 @@ jobs:
     working_directory: /go/src/github.com/warrensbox/github-appinstaller
 
     steps:
+      - checkout
       - run: 
           command: |    
             set +e   
