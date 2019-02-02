@@ -26,7 +26,7 @@ import (
 )
 
 const (
-	APIURL = "https://api.github.com/repos/%s/releases"
+	APIURL = "https://api.github.com/repos/%s/releases?client_id=%s&client_secret=%s"
 )
 
 var version = "0.1.0\n"
@@ -59,13 +59,21 @@ func init() {
 	log.SetLevel(simplelogger.INFO)
 	log.SetFlags(0)
 
+	if os.Getenv("CLIENT_ID") == "" {
+		log.Fatal("Outdated client id. Please upgrade to the latest version of appinstall to fix this")
+	}
+
+	if os.Getenv("CLIENT_SECRET") == "" {
+		log.Fatal("Outdated client secret. Please upgrade to the latest version of appinstall to fix this")
+	}
+
 }
 
 func main() {
 
 	kingpin.CommandLine.Interspersed(false)
 	kingpin.Parse()
-	apiURL := fmt.Sprintf(APIURL, *giturl)
+	apiURL := fmt.Sprintf(APIURL, *giturl, os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
 
 	if *debugFlag {
 		log.SetLevel(simplelogger.DEBUG)
