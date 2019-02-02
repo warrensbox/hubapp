@@ -36,9 +36,9 @@ Alternatively, you can install the binary from the source [here](https://github.
 ### Use dropdown menu to select version
 <img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall.gif" alt="drawing" style="width: 480px;"/>
 
-1.  You can switch between different versions of github user's app by typing the command `appinstall install user/repo` on your terminal. 
+1.  You can install and switch between different versions of github user's app by typing the command `appinstall install user/repo` on your terminal. 
 2.  Select the version of binary by using the up and down arrow.
-3.  Hit **Enter** to select the desired version.
+3.  Hit **Enter** to install the desired version.
 
 The most recently selected versions are presented at the top of the dropdown.
 
