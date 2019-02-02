@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/warrensbox/github-appinstaller.svg?branch=master)](https://travis-ci.org/warrensbox/github-appinstaller)
+[![Build Status](https://travis-ci.org/warrensbox/github-appinstaller.svg?branch=release)](https://travis-ci.org/warrensbox/github-appinstaller)
 [![Go Report Card](https://goreportcard.com/badge/github.com/warrensbox/github-appinstaller)](https://goreportcard.com/report/github.com/warrensbox/github-appinstaller)
-[![CircleCI](https://circleci.com/gh/warrensbox/github-appinstaller/tree/master.svg?style=shield&circle-token=d74b0de145c45b1d0da97f817363c77350e1a121)](https://circleci.com/gh/warrensbox/github-appinstaller)
+[![CircleCI](https://circleci.com/gh/warrensbox/github-appinstaller/tree/release.svg?style=shield&circle-token=841e653fa51878de92e379563ea50abbc542d7c9)]
 
 # Github App Installer
 
