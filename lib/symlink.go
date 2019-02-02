@@ -39,7 +39,6 @@ func RemoveSymlink(symlinkPath string) {
 func CheckSymlink(symlinkPath string) bool {
 
 	//symlink := false
-	//fmt.Println("Checking symlink")
 
 	fi, err := os.Lstat(symlinkPath)
 	if err != nil {

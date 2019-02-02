@@ -115,7 +115,7 @@ func main() {
 		lib.AddRecent(latestVersion, installLocation)
 
 	case "uninstall":
-		log.Debug("Action -> uninstall") //remove later
+		log.Debug("Action -> uninstall")
 		installLocation := lib.Uninstall(*giturl)
 		lib.RemoveContents(installLocation)
 	default:

@@ -7,8 +7,8 @@
 <img style="text-allign:center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/smallerlogo.png" alt="drawing" width="110" height="140"/>
 
 
-The `appinstall` command line tool lets you install app binaries from github user's repo -release. . 
-Once installed, simply select the version you require from the dropdown and start using the github user's binary. 
+The `appinstall` command line tool lets you install app binaries from github user's releases. 
+Once installed, simply select the version you require from the dropdown and start using the downloaded github user's app. 
 
 
 See installation guide here: [appinstall installation](https://warrensbox.github.io/github-appinstaller/)

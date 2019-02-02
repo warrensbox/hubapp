@@ -1,7 +1,7 @@
 # GitHub App Installer
 
-The `appinstall` command line tool lets you install app binaries from github user's repo -release. . 
-Once installed, simply select the version you require from the dropdown and start using the github user's binary. 
+The `appinstall` command line tool lets you install app binaries from github user's releases. 
+Once installed, simply select the version you require from the dropdown and start using the downloaded github user's app.  
 
 <hr>
 
