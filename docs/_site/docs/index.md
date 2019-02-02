@@ -25,12 +25,12 @@ brew install warrensbox/tap/appinstall
 Installation for Linux operation systems.
 
 ```sh
-curl -L https://raw.githubusercontent.com/warrensbox/terraform-switcher/release/install.sh | bash
+curl -L https://raw.githubusercontent.com/warrensbox//github-appinstaller/release/install.sh | bash
 ```
 
 ### Install from source
 
-Alternatively, you can install the binary from the source [here](https://github.com/warrensbox/terraform-switcher/releases) 
+Alternatively, you can install the binary from the source [here](https://github.com/warrensbox//github-appinstaller/releases) 
 
 <hr>
 
@@ -55,7 +55,7 @@ The most recently selected versions are presented at the top of the dropdown.
 
 ## Issues
 
-Please open  *issues* here: [New Issue](https://github.com/warrensbox/terraform-switcher/issues){:target="_blank"}
+Please open  *issues* here: [New Issue](https://github.com/warrensbox//github-appinstaller/issues){:target="_blank"}
 
 <hr>
 
