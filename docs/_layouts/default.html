@@ -17,15 +17,16 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
     <![endif]-->
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120055973-1"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics github-applinstaller-->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-120055973-2"></script>
     <script>
-      //testing
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'UA-120055973-1');
+
+      gtag('config', 'UA-120055973-2');
     </script>
+
   </head>
   <body>
     <div class="wrapper">
@@ -55,13 +56,10 @@
       <section>
 
       {{ content }}
-      {% if site.github.is_project_page %}
-      <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name.repo }}</a></small></p>
-      {% endif %}
       </section>
       <footer>
         <!-- <p><small>View other products &mdash; by <a href="http://warren.veerasingam.com/#about_me" target="_blank">Warren Veerasingam</a></small></p> -->
-        <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name.repo }}</a></small></p>
+        <p><small>This project is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name.repository_name }}</a></small></p>
       </footer>
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
