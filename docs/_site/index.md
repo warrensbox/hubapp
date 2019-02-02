@@ -1,9 +1,7 @@
-# appinstall Switcher 
+# GitHub App Installer
 
-The `appinstall` command line tool lets you switch between different versions of [appinstall](https://www.appinstall.io/){:target="_blank"}. 
-If you do not have a particular version of appinstall installed, `appinstall` will download the version you desire.
-The installation is minimal and easy. 
-Once installed, simply select the version you require from the dropdown and start using appinstall. 
+The `appinstall` command line tool lets you install app binaries from github user's repo -release. . 
+Once installed, simply select the version you require from the dropdown and start using the github user's binary. 
 
 <hr>
 
@@ -38,18 +36,25 @@ Alternatively, you can install the binary from the source [here](https://github.
 ### Use dropdown menu to select version
 <img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall.gif" alt="drawing" style="width: 480px;"/>
 
-1.  You can switch between different versions of appinstall by typing the command `appinstall` on your terminal. 
-2.  Select the version of appinstall you require by using the up and down arrow.
+1.  You can switch between different versions of github user's app by typing the command `appinstall install user/repo` on your terminal. 
+2.  Select the version of binary by using the up and down arrow.
 3.  Hit **Enter** to select the desired version.
 
 The most recently selected versions are presented at the top of the dropdown.
 
-### Supply version on command line
+### Upgrade current version
 <img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall-v4.gif" alt="drawing" style="width: 480px;"/>
 
-1. You can also supply the desired version as an argument on the command line.
-2. For example, `appinstall 0.10.5` for version 0.10.5 of appinstall.
-3. Hit **Enter** to switch.
+1. You can also upgrade to latest version of the app.
+2. For example, `appinstall upgrade user/repo` for version 0.10.5 of appinstall.
+3. Hit **Enter** to upgrade.
+
+### Uninstall Installed GitHub app
+<img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/appinstall/appinstall-v4.gif" alt="drawing" style="width: 480px;"/>
+
+1. You can also upgrade to latest version of the app.
+2. For example, `appinstall upgrade user/repo` for version 0.10.5 of appinstall.
+3. Hit **Enter** to upgrade.
 
 <hr>
 
