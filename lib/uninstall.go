@@ -63,18 +63,22 @@ func Uninstall(url string) string {
 
 //RemoveContents   remove all files in directory
 func RemoveContents(dir string) error {
+	fmt.Println("Attempting to remove installed files...")
 	d, err := os.Open(dir)
 	if err != nil {
+		fmt.Printf("Cannot find directory %s\n", dir)
 		return err
 	}
 	defer d.Close()
 	names, err := d.Readdirnames(-1)
 	if err != nil {
+		fmt.Printf("Cannot remove directory %s\n", dir)
 		return err
 	}
 	for _, name := range names {
 		err = os.RemoveAll(filepath.Join(dir, name))
 		if err != nil {
+			fmt.Printf("Cannot remove directory %s\n", dir)
 			return err
 		}
 	}

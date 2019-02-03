@@ -19,6 +19,7 @@ import (
 	"fmt"
 	"os"
 	"regexp"
+	"strings"
 
 	"github.com/manifoldco/promptui"
 	simplelogger "github.com/mmmorris1975/simple-logger"
@@ -130,7 +131,14 @@ func main() {
 	case "uninstall":
 		log.Debug("Action -> uninstall")
 		installLocation := lib.Uninstall(*giturl)
-		lib.RemoveContents(installLocation)
+		errContent := lib.RemoveContents(installLocation)
+		if errContent != nil {
+			log.Debug("Unable to remove files. Files might not have existed.")
+			os.Exit(0)
+		}
+		slice := strings.Split(*giturl, "/")
+		app := slice[1]
+		log.Infof("Uninstalled %s\n", app)
 	default:
 		if *versionFlag == false {
 			fmt.Println("Unknown action. See help. Ex: appinstall --help")
