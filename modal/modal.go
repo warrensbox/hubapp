@@ -83,3 +83,8 @@ type Uploader struct {
 	Type              string `json:"type"`
 	SiteAdmin         bool   `json:"site_admin"`
 }
+
+type Client struct {
+	ClientID     string
+	ClientSecret string
+}
