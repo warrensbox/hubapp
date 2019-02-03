@@ -4,7 +4,7 @@
 
 # Github App Installer
 
-<img style="text-allign:center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/github-appinstall/smallerlogo.png" alt="drawing" width="110" height="140"/>
+<img style="text-allign:center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/github-appinstall/smallerlogo.png" alt="drawing" width="130" height="140"/>
 
 
 The `appinstall` command line tool lets you install app binaries from github user's releases. 
