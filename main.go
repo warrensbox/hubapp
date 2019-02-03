@@ -57,20 +57,12 @@ func init() {
 
 	debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
 	versionFlag = kingpin.Flag("version", versionFlagDesc).Short('v').Bool()
-	action = kingpin.Arg("action", actionArgDesc).Required().String()
-	giturl = kingpin.Arg("user/repo", giturlArgDesc).Required().String()
+	action = kingpin.Arg("action", actionArgDesc).String()
+	giturl = kingpin.Arg("user/repo", giturlArgDesc).String()
 
 	log = simplelogger.StdLogger
 	log.SetLevel(simplelogger.INFO)
 	log.SetFlags(0)
-
-	// if os.Getenv("CLIENT_ID") == "" {
-	// 	log.Fatal("Outdated client id. Please upgrade to the latest version of appinstall to fix this")
-	// }
-
-	// if os.Getenv("CLIENT_SECRET") == "" {
-	// 	log.Fatal("Outdated client secret. Please upgrade to the latest version of appinstall to fix this")
-	// }
 
 }
 
@@ -84,12 +76,16 @@ func main() {
 	kingpin.CommandLine.Interspersed(false)
 	kingpin.Parse()
 
+	if *versionFlag {
+		fmt.Println(version)
+	}
+
 	if *debugFlag {
 		log.SetLevel(simplelogger.DEBUG)
 	}
 
 	semverRegex := regexp.MustCompile(`^\w+(-)?\w+\/\w+(-)?\w+?$`)
-	if semverRegex.MatchString(*giturl) == false {
+	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
 		log.Infof("Invalid repo format. Must be user/repo. Ex: appinstall install warrensbox/aws-find ")
 		os.Exit(1)
 	}
@@ -120,12 +116,12 @@ func main() {
 		installLocation := lib.Install(*giturl, ghversion, assets)
 		lib.AddRecent(ghversion, installLocation)
 
-	case "update":
-		log.Debug("Action -> update")
+	case "upgrade":
+		log.Debug("Action -> upgrade")
 
 		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL, &client)
 		if err != nil {
-			log.Error("Could not get the latest version. Trying `appinstall install user/repo`")
+			log.Error("Could not get the latest version. Try `appinstall install user/repo`")
 			os.Exit(1)
 		}
 		installLocation := lib.Install(*giturl, latestVersion, assets)
@@ -136,6 +132,8 @@ func main() {
 		installLocation := lib.Uninstall(*giturl)
 		lib.RemoveContents(installLocation)
 	default:
-		fmt.Println("Unknown action. See help. Ex: appinstall --help")
+		if *versionFlag == false {
+			fmt.Println("Unknown action. See help. Ex: appinstall --help")
+		}
 	}
 }
