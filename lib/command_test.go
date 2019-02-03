@@ -10,7 +10,7 @@ import (
 // TestNewCommand : pass value and check if returned value is a pointer
 func TestNewCommand(t *testing.T) {
 
-	testCmd := "terraform"
+	testCmd := "appinstaller"
 	cmd := lib.NewCommand(testCmd)
 
 	if reflect.ValueOf(cmd).Kind() == reflect.Ptr {

@@ -8,4 +8,6 @@ show_downloads: true
 
 exclude: [vendor]
 
+google_analytics: true
+
 #github: [metadata] 

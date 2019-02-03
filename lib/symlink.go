@@ -12,7 +12,7 @@ func CreateSymlink(cwd string, dir string) {
 	err := os.Symlink(cwd, dir)
 	if err != nil {
 		fmt.Println(err)
-		log.Fatalf("Unable to create symlink. You must have SUDO privileges %v \n", err)
+		log.Fatalf("Unable to create symlink. You must have SUDO privileges to %s directory \n", binLocation)
 		panic(err)
 	}
 }
@@ -23,13 +23,13 @@ func RemoveSymlink(symlinkPath string) {
 	_, err := os.Lstat(symlinkPath)
 	if err != nil {
 		fmt.Println(err)
-		log.Fatalf("Unable to find symlink. You must have SUDO privileges - %v \n", err)
+		log.Fatalf("Unable to find symlink. You must have SUDO privileges to %s directory \n", binLocation)
 		panic(err)
 	} else {
 		errRemove := os.Remove(symlinkPath)
 		if errRemove != nil {
 			fmt.Println(errRemove)
-			log.Fatalf("Unable to remove symlink. You must have SUDO privileges - %v \n", errRemove)
+			log.Fatalf("Unable to remove symlink. You must have SUDO privilegesto %s directory \n", binLocation)
 			panic(errRemove)
 		}
 	}
@@ -39,11 +39,10 @@ func RemoveSymlink(symlinkPath string) {
 func CheckSymlink(symlinkPath string) bool {
 
 	//symlink := false
-	//fmt.Println("Checking symlink")
 
 	fi, err := os.Lstat(symlinkPath)
 	if err != nil {
-		fmt.Println(err)
+		//fmt.Println(err)
 		// symlink = false
 		return false
 	}

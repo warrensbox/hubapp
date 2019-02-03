@@ -120,12 +120,14 @@ func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
 		Timeout: time.Second * 2, // Maximum of 2 secs
 	}
 
-	req, err := http.NewRequest(http.MethodGet, appURL, nil)
+	apiURL := fmt.Sprintf(appURL+"/latest?client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
+
+	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	req.Header.Set("User-Agent", "github-appinstaller")
+	req.Header.Set("User-Agent", "App Installer")
 
 	res, getErr := gswitch.Do(req)
 	if getErr != nil {
@@ -137,32 +139,30 @@ func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
 		log.Fatal(readErr)
 	}
 
-	var repo []modal.Repo
+	var repo modal.Repo
+	var repoArr []modal.Repo
 	jsonErr := json.Unmarshal(body, &repo)
 	if jsonErr != nil {
 		log.Fatal(jsonErr)
 	}
 
-	for _, num := range repo {
-		if num.Prerelease == false && num.Draft == false {
-			semverRegex := regexp.MustCompile(`\d+(\.\d+){2}\z`)
-			if semverRegex.MatchString(num.TagName) {
-				trimstr := strings.Trim(num.TagName, "v")
-				latestVersion = trimstr
-				//tgVersionList.tglist = append(tgVersionList.tglist, trimstr)
-			}
-			break
+	if repo.Prerelease == false && repo.Draft == false {
+		semverRegex := regexp.MustCompile(`\d+(\.\d+){2}\z`)
+		if semverRegex.MatchString(repo.TagName) {
+			trimstr := strings.Trim(repo.TagName, "v")
+			latestVersion = trimstr
 		}
-
 	}
 
-	fmt.Printf("The latest version is %s", latestVersion)
+	repoArr = append(repoArr, repo)
+
+	fmt.Printf("The latest version is %s \n", latestVersion)
 
 	if latestVersion != "" {
-		return latestVersion, repo, nil
+		return latestVersion, repoArr, nil
 	}
 
-	return "", repo, errors.New("Unable to get latest version")
+	return "", repoArr, errors.New("Unable to get latest version")
 }
 
 //GetAppList :  Get the list of available app versions
@@ -172,12 +172,14 @@ func GetAppList(appURL string) ([]string, []modal.Repo) {
 		Timeout: time.Second * 2, // Maximum of 2 secs [decresing this seem to fail]
 	}
 
-	req, err := http.NewRequest(http.MethodGet, appURL, nil)
+	apiURL := fmt.Sprintf(appURL+"?client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
+
+	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	req.Header.Set("User-Agent", "github-appinstaller")
+	req.Header.Set("User-Agent", "App Installer")
 
 	resp, _ := gswitch.Do(req)
 	links := resp.Header.Get("Link")
@@ -196,6 +198,11 @@ func GetAppList(appURL string) ([]string, []modal.Repo) {
 	}
 
 	applist, assets := getAppVersion(appURL, numPages)
+
+	if len(applist) == 0 {
+		log.Fatal("Unable to get release from repo ")
+		os.Exit(1)
+	}
 
 	return applist, assets
 }
@@ -256,16 +263,16 @@ func inBetween(value string, a string, b string) string {
 	return value[posFirstAdjusted:posLast]
 }
 
-func getAppVersion(appURLPage string, numPages int) ([]string, []modal.Repo) {
-	//version := make([]string, 0)
+func getAppVersion(appURL string, numPages int) ([]string, []modal.Repo) {
 	assets := make([]modal.Repo, 0)
 	ch := make(chan *[]modal.Repo, 10)
 
 	for i := 1; i <= numPages; i++ {
 		page := strconv.Itoa(i)
-		api := appURLPage + "?page=" + page
+		api := fmt.Sprintf(appURL+"?page=%s", page)
+		apiURL := fmt.Sprintf(api+"&client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
 		wg.Add(1)
-		go getAppBody(api, ch)
+		go getAppBody(apiURL, ch)
 	}
 
 	go func(ch chan<- *[]modal.Repo) {
@@ -319,12 +326,14 @@ func getAppBody(gruntURLPage string, ch chan<- *[]modal.Repo) {
 
 	body, readErr := ioutil.ReadAll(res.Body)
 	if readErr != nil {
+		log.Fatal("Unable to get release from repo ")
 		log.Fatal(readErr)
 	}
 
 	var repo []modal.Repo
 	jsonErr := json.Unmarshal(body, &repo)
 	if jsonErr != nil {
+		log.Fatal("Unable to get release from repo ")
 		log.Fatal(jsonErr)
 	}
 

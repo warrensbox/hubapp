@@ -18,6 +18,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 
 	"github.com/manifoldco/promptui"
 	simplelogger "github.com/mmmorris1975/simple-logger"
@@ -59,17 +60,32 @@ func init() {
 	log.SetLevel(simplelogger.INFO)
 	log.SetFlags(0)
 
+	if os.Getenv("CLIENT_ID") == "" {
+		log.Fatal("Outdated client id. Please upgrade to the latest version of appinstall to fix this")
+	}
+
+	if os.Getenv("CLIENT_SECRET") == "" {
+		log.Fatal("Outdated client secret. Please upgrade to the latest version of appinstall to fix this")
+	}
+
 }
 
 func main() {
 
 	kingpin.CommandLine.Interspersed(false)
 	kingpin.Parse()
-	apiURL := fmt.Sprintf(APIURL, *giturl)
 
 	if *debugFlag {
 		log.SetLevel(simplelogger.DEBUG)
 	}
+
+	semverRegex := regexp.MustCompile(`^\w+(-)?\w+\/\w+(-)?\w+?$`)
+	if semverRegex.MatchString(*giturl) == false {
+		log.Infof("Invalid repo format. Must be user/repo. Ex: appinstall install warrensbox/aws-find ")
+		os.Exit(1)
+	}
+
+	apiURL := fmt.Sprintf(APIURL, *giturl)
 
 	switch *action {
 	case "install":
@@ -88,7 +104,7 @@ func main() {
 		_, ghversion, errPrompt := prompt.Run()
 
 		if errPrompt != nil {
-			log.Printf("Prompt failed %v\n", errPrompt)
+			log.Info("Prompt failed %v\n", errPrompt)
 			os.Exit(1)
 		}
 
@@ -100,14 +116,14 @@ func main() {
 
 		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL)
 		if err != nil {
-			log.Error("Could not get the latest version. Trying `appinstalll install user/repo`")
+			log.Error("Could not get the latest version. Trying `appinstall install user/repo`")
 			os.Exit(1)
 		}
 		installLocation := lib.Install(*giturl, latestVersion, assets)
 		lib.AddRecent(latestVersion, installLocation)
 
 	case "uninstall":
-		log.Debug("Action -> uninstall") //remove later
+		log.Debug("Action -> uninstall")
 		installLocation := lib.Uninstall(*giturl)
 		lib.RemoveContents(installLocation)
 	default:

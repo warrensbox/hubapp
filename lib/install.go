@@ -71,12 +71,9 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 			if len(v.Assets) > 0 {
 				for _, b := range v.Assets {
 
-					fmt.Println(goarch)
-					fmt.Println(goos)
 					matchedOS, _ := regexp.MatchString(goos, b.BrowserDownloadURL)
 					matchedARCH, _ := regexp.MatchString(goarch, b.BrowserDownloadURL)
 					if matchedOS && matchedARCH {
-						fmt.Println(b.BrowserDownloadURL)
 						urlDownload = b.BrowserDownloadURL
 						break
 					}
@@ -92,13 +89,9 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	filesExist := GetListOfFile(installLocation)
 
 	for _, file := range filesExist {
-		fmt.Println("File exist")
-		fmt.Println(file)
-		fmt.Println(appversion)
 
 		if matchedFile, _ := regexp.MatchString(appversion, file); matchedFile {
 			fileExist = true
-			fmt.Println(matchedFile)
 		}
 	}
 
@@ -128,7 +121,6 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	/* proceed to download it from the app release page */
 	fileInstalled, _ := DownloadFromURL(installLocation, urlDownload)
 
-	//fmt.Println(fileInstalled)
 	/* rename file to app version name - app_x.x.x */
 	RenameFile(fileInstalled, installLocation+installVersion+appversion)
 
