@@ -23,6 +23,7 @@ import (
 	"github.com/manifoldco/promptui"
 	simplelogger "github.com/mmmorris1975/simple-logger"
 	"github.com/warrensbox/github-appinstaller/lib"
+	"github.com/warrensbox/github-appinstaller/modal"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -31,6 +32,9 @@ const (
 )
 
 var version = "0.1.0\n"
+
+var CLIENT_ID = "xxx"
+var CLIENT_SECRET = "xxx"
 
 var (
 	debugFlag   *bool
@@ -60,17 +64,22 @@ func init() {
 	log.SetLevel(simplelogger.INFO)
 	log.SetFlags(0)
 
-	if os.Getenv("CLIENT_ID") == "" {
-		log.Fatal("Outdated client id. Please upgrade to the latest version of appinstall to fix this")
-	}
+	// if os.Getenv("CLIENT_ID") == "" {
+	// 	log.Fatal("Outdated client id. Please upgrade to the latest version of appinstall to fix this")
+	// }
 
-	if os.Getenv("CLIENT_SECRET") == "" {
-		log.Fatal("Outdated client secret. Please upgrade to the latest version of appinstall to fix this")
-	}
+	// if os.Getenv("CLIENT_SECRET") == "" {
+	// 	log.Fatal("Outdated client secret. Please upgrade to the latest version of appinstall to fix this")
+	// }
 
 }
 
 func main() {
+
+	var client modal.Client
+
+	client.ClientID = CLIENT_ID
+	client.ClientSecret = CLIENT_SECRET
 
 	kingpin.CommandLine.Interspersed(false)
 	kingpin.Parse()
@@ -90,7 +99,7 @@ func main() {
 	switch *action {
 	case "install":
 		log.Debug("Action -> install")
-		ghlist, assets := lib.GetAppList(apiURL)
+		ghlist, assets := lib.GetAppList(apiURL, &client)
 		recentVersions, _ := lib.GetRecentVersions()
 		ghlist = append(recentVersions, ghlist...)
 		ghlist = lib.RemoveDuplicateVersions(ghlist) //remove duplicate version
@@ -114,7 +123,7 @@ func main() {
 	case "update":
 		log.Debug("Action -> update")
 
-		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL)
+		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL, &client)
 		if err != nil {
 			log.Error("Could not get the latest version. Trying `appinstall install user/repo`")
 			os.Exit(1)

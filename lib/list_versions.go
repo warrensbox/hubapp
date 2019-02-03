@@ -113,14 +113,14 @@ var wg = sync.WaitGroup{}
 var numPages = 5
 
 //GetAppLatestVersion :  Get the latest available app versions
-func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
+func GetAppLatestVersion(appURL string, client *modal.Client) (string, []modal.Repo, error) {
 
 	var latestVersion string
 	gswitch := http.Client{
 		Timeout: time.Second * 2, // Maximum of 2 secs
 	}
 
-	apiURL := fmt.Sprintf(appURL+"/latest?client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
+	apiURL := fmt.Sprintf(appURL+"/latest?client_id=%s&client_secret=%s", client.ClientID, client.ClientSecret)
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
@@ -166,13 +166,13 @@ func GetAppLatestVersion(appURL string) (string, []modal.Repo, error) {
 }
 
 //GetAppList :  Get the list of available app versions
-func GetAppList(appURL string) ([]string, []modal.Repo) {
+func GetAppList(appURL string, client *modal.Client) ([]string, []modal.Repo) {
 
 	gswitch := http.Client{
 		Timeout: time.Second * 2, // Maximum of 2 secs [decresing this seem to fail]
 	}
 
-	apiURL := fmt.Sprintf(appURL+"?client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
+	apiURL := fmt.Sprintf(appURL+"?client_id=%s&client_secret=%s", client.ClientID, client.ClientSecret)
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
@@ -197,7 +197,7 @@ func GetAppList(appURL string) ([]string, []modal.Repo) {
 		}
 	}
 
-	applist, assets := getAppVersion(appURL, numPages)
+	applist, assets := getAppVersion(appURL, numPages, client)
 
 	if len(applist) == 0 {
 		log.Fatal("Unable to get release from repo ")
@@ -263,14 +263,14 @@ func inBetween(value string, a string, b string) string {
 	return value[posFirstAdjusted:posLast]
 }
 
-func getAppVersion(appURL string, numPages int) ([]string, []modal.Repo) {
+func getAppVersion(appURL string, numPages int, client *modal.Client) ([]string, []modal.Repo) {
 	assets := make([]modal.Repo, 0)
 	ch := make(chan *[]modal.Repo, 10)
 
 	for i := 1; i <= numPages; i++ {
 		page := strconv.Itoa(i)
 		api := fmt.Sprintf(appURL+"?page=%s", page)
-		apiURL := fmt.Sprintf(api+"&client_id=%s&client_secret=%s", os.Getenv("CLIENT_ID"), os.Getenv("CLIENT_SECRET"))
+		apiURL := fmt.Sprintf(api+"&client_id=%s&client_secret=%s", client.ClientID, client.ClientSecret)
 		wg.Add(1)
 		go getAppBody(apiURL, ch)
 	}

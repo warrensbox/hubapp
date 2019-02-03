@@ -4,9 +4,11 @@ VER := $(shell git ls-remote --tags git://github.com/warrensbox/github-appinstal
 PATH := build:$(PATH)
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
+CLIENT_ID := $(CLIENT_ID)
+CLIENT_SECRET := $(CLIENT_SECRET)
 
 $(EXE): Gopkg.lock *.go lib/*.go
-	go build -v -ldflags "-X main.version=$(VER)" -o $@ $(PKG)
+	go build -v -ldflags "-X main.version=$(VER) main.CLIENT_ID=$(CLIENT_ID) main.CLIENT_SECRET=$(CLIENT_SECRET)" -o $@ $(PKG)
 
 Gopkg.lock: Gopkg.toml
 	dep ensure
