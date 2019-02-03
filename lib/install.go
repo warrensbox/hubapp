@@ -5,10 +5,12 @@ import (
 	"log"
 	"os"
 	"os/user"
+	"path/filepath"
 	"regexp"
 	"runtime"
 	"strings"
 
+	"github.com/mholt/archiver"
 	"github.com/warrensbox/github-appinstaller/modal"
 )
 
@@ -89,7 +91,6 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	filesExist := GetListOfFile(installLocation)
 
 	for _, file := range filesExist {
-
 		if matchedFile, _ := regexp.MatchString(appversion, file); matchedFile {
 			fileExist = true
 		}
@@ -97,7 +98,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	/* if selected version already exist, */
 	if fileExist {
-
+		fmt.Println("File exist")
 		/* remove current symlink if exist*/
 		symlinkExist := CheckSymlink(installedBinPath)
 
@@ -106,7 +107,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 		}
 		/* set symlink to desired version */
 		CreateSymlink(installLocation+installVersion+appversion, installedBinPath)
-		fmt.Printf("Switched app to version %q \n", appversion)
+		fmt.Printf("Switched app to version %s \n", appversion)
 		return installLocation
 	}
 
@@ -121,6 +122,30 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	/* proceed to download it from the app release page */
 	fileInstalled, _ := DownloadFromURL(installLocation, urlDownload)
 
+	ext := filepath.Ext(fileInstalled)
+
+	/* if file is compressed, get extension */
+	if ext == ".gz" || ext == ".tar.gz" || ext == ".gip" {
+
+		tmpFile := fmt.Sprintf(installLocation+"files_%s", appversion)
+
+		errArchive := archiver.Unarchive(fileInstalled, tmpFile)
+		if errArchive != nil {
+			log.Println(errArchive)
+		}
+
+		exist := CheckDirHasBin(tmpFile, app)
+
+		if exist {
+			RemoveAFile(fileInstalled)
+			fileInstalled = fmt.Sprintf(tmpFile+"/%s", app)
+		} else {
+			log.Fatal("Unable to download and create a symlink to the downloaded binary")
+			os.Exit(1)
+		}
+
+	}
+
 	/* rename file to app version name - app_x.x.x */
 	RenameFile(fileInstalled, installLocation+installVersion+appversion)
 
@@ -131,7 +156,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	// /* set symlink to desired version */
 	CreateSymlink(installLocation+installVersion+appversion, installedBinPath)
-	fmt.Printf("Switched app to version %q \n", appversion)
+	fmt.Printf("Switched app to version %s \n", appversion)
 	return installLocation
 }
 

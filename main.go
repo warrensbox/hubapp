@@ -78,7 +78,7 @@ func main() {
 	kingpin.Parse()
 
 	if *versionFlag {
-		fmt.Println(version)
+		fmt.Printf("Version : %s\n", version)
 	}
 
 	if *debugFlag {
@@ -87,7 +87,7 @@ func main() {
 
 	semverRegex := regexp.MustCompile(`^\w+(-)?\w+\/\w+(-)?\w+?$`)
 	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
-		log.Infof("Invalid repo format. Must be user/repo. Ex: appinstall install warrensbox/aws-find ")
+		log.Info("Invalid repo format. Must be user/repo. Ex: appinstall install warrensbox/aws-find ")
 		os.Exit(1)
 	}
 
