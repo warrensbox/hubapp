@@ -131,6 +131,7 @@ func main() {
 		log.Debug("Action -> uninstall")
 		installLocation := lib.Uninstall(*giturl)
 		lib.RemoveContents(installLocation)
+		log.Info("Uninstalled ")
 	default:
 		if *versionFlag == false {
 			fmt.Println("Unknown action. See help. Ex: appinstall --help")
