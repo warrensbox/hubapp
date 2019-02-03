@@ -8,7 +8,7 @@ CLIENT_ID := $(CLIENT_ID)
 CLIENT_SECRET := $(CLIENT_SECRET)
 
 $(EXE): Gopkg.lock *.go lib/*.go
-	go build -v -ldflags "-X main.version=$(VER) main.CLIENT_ID=$(CLIENT_ID) main.CLIENT_SECRET=$(CLIENT_SECRET)" -o $@ $(PKG)
+	go build -v -ldflags "-X main.version=$(VER) -X main.CLIENT_ID=$(CLIENT_ID) -X main.CLIENT_SECRET=$(CLIENT_SECRET)" -o $@ $(PKG)
 
 Gopkg.lock: Gopkg.toml
 	dep ensure
@@ -18,7 +18,7 @@ release: $(EXE) darwin linux
 
 .PHONY: darwin linux 
 darwin linux:
-	GOOS=$@ go build -ldflags "-X main.version=$(VER)" -o $(EXE)-$(VER)-$@-$(GOARCH) $(PKG)
+	GOOS=$@ go build -ldflags "-X main.version=$(VER) -X main.CLIENT_ID=$(CLIENT_ID) -X main.CLIENT_SECRET=$(CLIENT_SECRET)" -o $(EXE)-$(VER)-$@-$(GOARCH) $(PKG)
 
 .PHONY: clean
 clean:
