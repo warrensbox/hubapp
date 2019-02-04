@@ -55,7 +55,7 @@ The most recently selected versions are presented at the top of the dropdown.
 2. For example, `appinstall upgrade user/repo`  to upgrade to a higher version of the app.
 3. Hit **Enter** to upgrade.
 
-### Uninstall Installed GitHub app
+### Uninstall GitHub app
 <img align="center" src="https://s3.us-east-2.amazonaws.com/kepler-images/warrensbox/github-appinstall/appinstalldemo3.gif" alt="drawing" style="width: 480px;"/>
 
 1. You can also uninstalled github user's.
