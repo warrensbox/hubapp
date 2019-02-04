@@ -21,7 +21,15 @@ func RenameFile(src string, dest string) {
 	}
 }
 
-// RemoveFiles : remove file
+// RemoveAFile : remove a file
+func RemoveAFile(srcDir string) {
+	if err := os.Remove(srcDir); err != nil {
+		fmt.Printf("Unable to remove file from %s\n", srcDir)
+		panic(err)
+	}
+}
+
+// RemoveFiles : remove files
 func RemoveFiles(src string) {
 	files, err := filepath.Glob(src)
 	if err != nil {
@@ -35,6 +43,7 @@ func RemoveFiles(src string) {
 	}
 }
 
+// GetListOfFile : get list of files from directory
 func GetListOfFile(root string) []string {
 	var files []string
 
@@ -141,8 +150,8 @@ func IsDirEmpty(name string) bool {
 	return exist // Either not empty or error, suits both cases
 }
 
-//CheckDirHasTGBin : // check binary exist (TODO UNIT TEST)
-func CheckDirHasTGBin(dir, prefix string) bool {
+//CheckDirHasBin : // check binary exist (TODO UNIT TEST)
+func CheckDirHasBin(dir, prefix string) bool {
 
 	exist := false
 
