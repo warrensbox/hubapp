@@ -289,8 +289,8 @@ func TestIsDirEmpty(t *testing.T) {
 
 }
 
-// TestCheckDirHasTGBin : create tg file in directory, check if exist
-func TestCheckDirHasTGBin(t *testing.T) {
+// TestCheckDirHasBin : create tg file in directory, check if exist
+func TestCheckDirHasBin(t *testing.T) {
 
 	goarch := runtime.GOARCH
 	goos := runtime.GOOS
@@ -307,7 +307,7 @@ func TestCheckDirHasTGBin(t *testing.T) {
 
 	createFile(installLocation + installFile + "_" + goos + "_" + goarch)
 
-	empty := lib.CheckDirHasTGBin(installLocation, installFile)
+	empty := lib.CheckDirHasBin(installLocation, installFile)
 
 	t.Logf("Expected directory to have tg file %v [expected]", installLocation+installFile+"_"+goos+"_"+goarch)
 
