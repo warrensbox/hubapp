@@ -124,7 +124,7 @@ func GetAppLatestVersion(appURL string, client *modal.Client) (string, []modal.R
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Unable to make request. Try again later.")
 	}
 
 	req.Header.Set("User-Agent", "App Installer")
@@ -176,7 +176,7 @@ func GetAppList(appURL string, client *modal.Client) ([]string, []modal.Repo) {
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Unable to make request. Try again later.")
 	}
 
 	req.Header.Set("User-Agent", "App Installer")
@@ -314,7 +314,7 @@ func getAppBody(gruntURLPage string, ch chan<- *[]modal.Repo) {
 
 	req, err := http.NewRequest(http.MethodGet, gruntURLPage, nil)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Unable to make request. Try again later.")
 	}
 
 	req.Header.Set("User-Agent", "github-appinstaller")
