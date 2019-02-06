@@ -1,8 +1,8 @@
 theme: jekyll-theme-minimal
 #github: [metadata] 
-repository: warrensbox/github-appinstaller
+repository: warrensbox/hubapp
 logo: /assets/img/logo.png
-title: appinstall
+title: hubapp
 
 show_downloads: true
 

@@ -9,7 +9,7 @@ package main
 /*
 * 1- Make GET call to receive release json from github
 * 2- Download released app from archive
-* 3- Rename the file from `appinstall` to `appinstall_version`
+* 3- Rename the file from `hubapp` to `hubapp_version`
 * 4- Read the existing symlink for app (Check if it's a homebrew symlink)
 * 6- Remove that symlink (Check if it's a homebrew symlink)
 * 7- Create new symlink to binary  `github app`
@@ -23,8 +23,8 @@ import (
 
 	"github.com/manifoldco/promptui"
 	simplelogger "github.com/mmmorris1975/simple-logger"
-	"github.com/warrensbox/github-appinstaller/lib"
-	"github.com/warrensbox/github-appinstaller/modal"
+	"github.com/warrensbox/hubapp/lib"
+	"github.com/warrensbox/hubapp/modal"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
 )
 
@@ -49,8 +49,8 @@ var (
 func init() {
 
 	const (
-		cmdDesc         = "Install github app binaries on your local machine. Ex: appinstall installwarrensbox/aws-find"
-		versionFlagDesc = "Displays the version of appinstall"
+		cmdDesc         = "Install github app binaries on your local machine. Ex: hubapp installwarrensbox/aws-find"
+		versionFlagDesc = "Displays the version of hubapp"
 		actionArgDesc   = "Provide action needed. Ex: install, update, or uninstall"
 		giturlArgDesc   = "Provide giturl in user/repo format. Ex: warrensbox/aws-find"
 		debugFlagDesc   = "Provide debug output"
@@ -87,7 +87,7 @@ func main() {
 
 	semverRegex := regexp.MustCompile(`^\w+(-)?\w+\/\w+(-)?\w+?$`)
 	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
-		log.Info("Invalid repo format. Must be user/repo. Ex: appinstall install warrensbox/aws-find ")
+		log.Info("Invalid repo format. Must be user/repo. Ex: hubapp install warrensbox/aws-find ")
 		os.Exit(1)
 	}
 
@@ -122,7 +122,7 @@ func main() {
 
 		latestVersion, assets, err := lib.GetAppLatestVersion(apiURL, &client)
 		if err != nil {
-			log.Error("Could not get the latest version. Try `appinstall install user/repo`")
+			log.Error("Could not get the latest version. Try `hubapp install user/repo`")
 			os.Exit(1)
 		}
 		installLocation := lib.Install(*giturl, latestVersion, assets)
@@ -141,7 +141,7 @@ func main() {
 		log.Infof("Uninstalled %s\n", app)
 	default:
 		if *versionFlag == false {
-			fmt.Println("Unknown action. See help. Ex: appinstall --help")
+			fmt.Println("Unknown action. See help. Ex: hubapp --help")
 		}
 	}
 }

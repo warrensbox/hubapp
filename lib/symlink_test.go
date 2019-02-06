@@ -6,7 +6,7 @@ import (
 	"os/user"
 	"testing"
 
-	"github.com/warrensbox/github-appinstaller/lib"
+	"github.com/warrensbox/hubapp/lib"
 )
 
 // TestCreateSymlink : check if symlink exist-remove if exist,

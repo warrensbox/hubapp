@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/mholt/archiver"
-	"github.com/warrensbox/github-appinstaller/modal"
+	"github.com/warrensbox/hubapp/modal"
 )
 
 const (
@@ -139,6 +139,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 		if exist {
 			RemoveAFile(fileInstalled)
 			fileInstalled = fmt.Sprintf(tmpFile+"/%s", app)
+
 		} else {
 			log.Fatal("Unable to download and create a symlink to the downloaded binary")
 			os.Exit(1)

@@ -4,13 +4,13 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/warrensbox/github-appinstaller/lib"
+	"github.com/warrensbox/hubapp/lib"
 )
 
 // TestNewCommand : pass value and check if returned value is a pointer
 func TestNewCommand(t *testing.T) {
 
-	testCmd := "appinstaller"
+	testCmd := "hubapper"
 	cmd := lib.NewCommand(testCmd)
 
 	if reflect.ValueOf(cmd).Kind() == reflect.Ptr {

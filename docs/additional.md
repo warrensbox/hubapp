@@ -6,14 +6,14 @@
 ### Homebrew
 
 ```ruby
-brew upgrade warrensbox/tap/appinstall
+brew upgrade warrensbox/tap/hubapp
 ```
 ### Linux
 
 Rerun:
 
 ```sh
-curl -L https://raw.githubusercontent.com/warrensbox/github-appinstaller/release/install.sh | bash
+curl -L https://raw.githubusercontent.com/warrensbox/hubapp/release/install.sh | bash
 ```
 
 ## Uninstall:
@@ -21,14 +21,14 @@ curl -L https://raw.githubusercontent.com/warrensbox/github-appinstaller/release
 ### Homebrew
 
 ```ruby
-brew uninstall warrensbox/tap/appinstall
+brew uninstall warrensbox/tap/hubapp
 ```
 ### Linux
 
 Rerun:
 
 ```sh
-rm /usr/local/bin/appinstall
+rm /usr/local/bin/hubapp
 ```
 
 ## Troubleshoot:
@@ -45,7 +45,7 @@ install: can't change permissions of /usr/local/bin: Operation not permitted
 ```ruby
 "Unable to create symlink. You must have SUDO privileges"
 ```
-You probably need to have **sudo** privileges to install *appinstall*.
+You probably need to have **sudo** privileges to install *hubapp*.
 
 [Back to top](#upgrade)    
 [Back to main](index)
