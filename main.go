@@ -85,7 +85,7 @@ func main() {
 		log.SetLevel(simplelogger.DEBUG)
 	}
 
-	semverRegex := regexp.MustCompile(`^\w+(-)?\w+\/\w+(-)?\w+?$`)
+	semverRegex := regexp.MustCompile(`^[a-zA-Z\d-_]*\/[a-zA-Z\d-_]*$`)
 	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
 		log.Info("Invalid repo format. Must be user/repo. Ex: hubapp install warrensbox/aws-find ")
 		os.Exit(1)
