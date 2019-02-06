@@ -59,7 +59,7 @@ brew:
 
   # Your app's homepage.
   # Default is empty.
-  homepage: "https://warrensbox.github.io/github-hubapp"
+  homepage: "https://warrensbox.github.io/hubapp"
 
   # Your app's description.
   # Default is empty.
