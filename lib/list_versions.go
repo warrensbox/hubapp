@@ -17,7 +17,7 @@ import (
 	"sync"
 	"time"
 
-	modal "github.com/warrensbox/github-appinstaller/modal"
+	modal "github.com/warrensbox/hubapp/modal"
 )
 
 type AppVersionList struct {
@@ -34,21 +34,21 @@ func GetAppLatestVersion(appURL string, client *modal.Client) (string, []modal.R
 
 	var latestVersion string
 	gswitch := http.Client{
-		Timeout: time.Second * 2, // Maximum of 2 secs
+		Timeout: time.Second * 10, // Maximum of 10 secs
 	}
 
 	apiURL := fmt.Sprintf(appURL+"/latest?client_id=%s&client_secret=%s", client.ClientID, client.ClientSecret)
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
-		log.Fatal("Unable to make request. Try again later.")
+		log.Fatal("Unable to make request. Please try again.")
 	}
 
 	req.Header.Set("User-Agent", "App Installer")
 
 	res, getErr := gswitch.Do(req)
 	if getErr != nil {
-		log.Fatal(getErr)
+		log.Fatal("Unable to make request. Please try again.")
 	}
 
 	body, readErr := ioutil.ReadAll(res.Body)
@@ -86,19 +86,22 @@ func GetAppLatestVersion(appURL string, client *modal.Client) (string, []modal.R
 func GetAppList(appURL string, client *modal.Client) ([]string, []modal.Repo) {
 
 	gswitch := http.Client{
-		Timeout: time.Second * 2, // Maximum of 2 secs [decresing this seem to fail]
+		Timeout: time.Second * 10, // Maximum of 10 secs [decresing this seem to fail]
 	}
 
 	apiURL := fmt.Sprintf(appURL+"?client_id=%s&client_secret=%s", client.ClientID, client.ClientSecret)
 
 	req, err := http.NewRequest(http.MethodGet, apiURL, nil)
 	if err != nil {
-		log.Fatal("Unable to make request. Try again later.")
+		log.Fatal("Unable to make request. Please try again.")
 	}
 
 	req.Header.Set("User-Agent", "App Installer")
 
-	resp, _ := gswitch.Do(req)
+	resp, errAPI := gswitch.Do(req)
+	if errAPI != nil {
+		log.Fatal("Unable to make request. Please try again.")
+	}
 	links := resp.Header.Get("Link")
 	link := strings.Split(links, ",")
 
@@ -231,10 +234,10 @@ func getAppBody(gruntURLPage string, ch chan<- *[]modal.Repo) {
 
 	req, err := http.NewRequest(http.MethodGet, gruntURLPage, nil)
 	if err != nil {
-		log.Fatal("Unable to make request. Try again later.")
+		log.Fatal("Unable to make request. Please try again.")
 	}
 
-	req.Header.Set("User-Agent", "github-appinstaller")
+	req.Header.Set("User-Agent", "hubapp")
 
 	res, getErr := gswitch.Do(req)
 	if getErr != nil {

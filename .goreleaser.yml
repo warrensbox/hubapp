@@ -32,7 +32,7 @@ archive:
 brew:
   # Name of the recipe
   # Default to project name
-  name: appinstall
+  name: hubapp
 
   # Reporitory to push the tap to.
   github:
@@ -55,15 +55,15 @@ brew:
 
   # Caveats for the user of your binary.
   # Default is empty.
-  caveats: "Type 'appinstall install user/repo' on your command line and choose the app version that you want from the dropdown from the GitHub repo. This command currently only works on MacOs and Linux"
+  caveats: "Type 'hubapp install user/repo' on your command line and choose the app version that you want from the dropdown from the GitHub repo. This command currently only works on MacOs and Linux"
 
   # Your app's homepage.
   # Default is empty.
-  homepage: "https://warrensbox.github.io/github-appinstall"
+  homepage: "https://warrensbox.github.io/hubapp"
 
   # Your app's description.
   # Default is empty.
-  description: "The appinstall command lets you install binary application from github."
+  description: "The hubapp command lets you install binary application from github."
 
   # Setting this will prevent goreleaser to actually try to commit the updated
   # formula - instead, the formula file will be stored on the dist folder only,
@@ -77,10 +77,31 @@ brew:
   # So you can `brew test` your formula.
   # Default is empty.
   test: |
-    system "#{bin}/appinstall --version"
+    system "#{bin}/hubapp --version"
 
   # Custom install script for brew.
   # Default is 'bin.install "program"'.
   install: |
-    bin.install "appinstall"
+    bin.install "hubapp"
+release:
+  # Repo in which the release will be created.
+  # Default is extracted from the origin remote URL.
+  github:
+    owner: warrensbox
+    name: hubapp
+
+  # If set to true, will not auto-publish the release.
+  # Default is false.
+  draft: false
+
+  # If set to auto, will mark the release as not ready for production
+  # in case there is an indicator for this in the tag e.g. v1.0.0-rc1
+  # If set to true, will mark the release as not ready for production.
+  # Default is false.
+  prerelease: false
+
+  # You can disable this pipe in order to not upload any artifacts to
+  # GitHub.
+  # Defaults to false.
+  disable: false
 

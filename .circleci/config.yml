@@ -7,7 +7,7 @@ jobs:
     docker:
       - image: circleci/golang:1.10
 
-    working_directory: /go/src/github.com/warrensbox/github-appinstaller
+    working_directory: /go/src/github.com/warrensbox/hubapp
 
     steps:
       - checkout
@@ -18,24 +18,19 @@ jobs:
             go vet -tests=false ./...
             go test -v ./...
             mkdir -p build
-            go build -v -o build/appinstall
+            go build -v -o build/hubapp
 
   release:
     docker:
       - image: circleci/golang:1.11
 
-    working_directory: /go/src/github.com/warrensbox/terragrunt-switcher
+    working_directory: /go/src/github.com/warrensbox/hubapp
 
     steps:
       - checkout
       - run: 
           command: |
             set +e   
-            go get -v -t -d ./...
-            go vet -tests=false ./...
-            go test -v ./...
-            mkdir -p build
-            go build -v -o build/appinstall
             source version
             export RELEASE_VERSION; 
             RELEASE_VERSION=$RELEASE_VERSION.${CIRCLE_BUILD_NUM}
@@ -44,6 +39,7 @@ jobs:
             mkdir -p /home/circleci/bin
             curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
             export PATH="/home/warrensbox/bin:${PATH}"
+            dep ensure
             rm -rf dist
             git config user.email "warren.veerasingam@gmail.com"
             git config user.name "warrensbox"

@@ -4,11 +4,11 @@ import (
 	"log"
 	"testing"
 
-	"github.com/warrensbox/github-appinstaller/lib"
+	"github.com/warrensbox/hubapp/lib"
 )
 
 const (
-	gruntURL = "https://api.github.com/repos/gruntwork-io/appinstall/releases"
+	gruntURL = "https://api.github.com/repos/gruntwork-io/hubapp/releases"
 )
 
 // TestGetAppList : Get list from github
