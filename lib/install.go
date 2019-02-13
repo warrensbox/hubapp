@@ -69,7 +69,15 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	for _, v := range assests {
 
-		if v.TagName == appversion {
+		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
+		version := v.TagName
+
+		if semverRegex.MatchString(v.TagName) {
+			trimstr := strings.Trim(v.TagName, "v")
+			version = trimstr
+		}
+
+		if version == appversion {
 			if len(v.Assets) > 0 {
 				for _, b := range v.Assets {
 

@@ -209,9 +209,17 @@ func getAppVersion(appURL string, numPages int, client *modal.Client) ([]string,
 	var sortedVersion []string
 
 	for _, v := range assets {
-		sv, err := NewVersion(v.TagName)
+		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
+		version := v.TagName
+
+		if semverRegex.MatchString(v.TagName) {
+			trimstr := strings.Trim(v.TagName, "v")
+			version = trimstr
+		}
+
+		sv, err := NewVersion(version)
 		if err != nil {
-			fmt.Println(err)
+			log.Fatalf("Version does not match semver pattern. %s", err)
 		}
 		semvers = append(semvers, sv)
 	}
