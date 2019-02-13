@@ -69,20 +69,45 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	for _, v := range assests {
 
-		if v.TagName == appversion {
+		/* some github release tags include v in their server tag name */
+		/* if "v" is included in the tag name, it is removed" */
+		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
+		version := v.TagName
+
+		if semverRegex.MatchString(v.TagName) {
+			trimstr := strings.Trim(v.TagName, "v") /* remove lowercase v */
+			version = trimstr
+		}
+
+		if version == appversion {
 			if len(v.Assets) > 0 {
 				for _, b := range v.Assets {
 
-					matchedOS, _ := regexp.MatchString(goos, b.BrowserDownloadURL)
-					matchedARCH, _ := regexp.MatchString(goarch, b.BrowserDownloadURL)
-					if matchedOS && matchedARCH {
-						urlDownload = b.BrowserDownloadURL
+					if b.BrowserDownloadURL != "" {
+						matchedOS, _ := regexp.MatchString(goos, b.BrowserDownloadURL)
+						matchedARCH, _ := regexp.MatchString(goarch, b.BrowserDownloadURL)
+						if matchedOS && matchedARCH {
+							urlDownload = b.BrowserDownloadURL
+							break
+						}
+					} else {
+						/* no download assets found */
 						break
 					}
+
 				}
 			}
 			break
 		}
+	}
+
+	/* no downloadable binaries with the proper name in the assets */
+	if urlDownload == "" {
+		log.Fatal(`
+		No binaries found matching your computer's operating system or architecture. 
+		Please verify user's releases for a valid binary. 
+		The release binary should have the operating system and architecture in it's name.
+		`)
 	}
 
 	/* check if selected version already downloaded */
