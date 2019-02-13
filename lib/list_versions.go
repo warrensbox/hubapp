@@ -209,11 +209,14 @@ func getAppVersion(appURL string, numPages int, client *modal.Client) ([]string,
 	var sortedVersion []string
 
 	for _, v := range assets {
-		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
+
 		version := v.TagName
 
+		/* some github release tags include v in their server tag name */
+		/* if "v" is included in the tag name, it is removed" */
+		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
 		if semverRegex.MatchString(v.TagName) {
-			trimstr := strings.Trim(v.TagName, "v")
+			trimstr := strings.Trim(v.TagName, "v") /* remove lowercase v */
 			version = trimstr
 		}
 

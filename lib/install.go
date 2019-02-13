@@ -69,11 +69,13 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 
 	for _, v := range assests {
 
+		/* some github release tags include v in their server tag name */
+		/* if "v" is included in the tag name, it is removed" */
 		semverRegex := regexp.MustCompile(`\Av\d+(\.\d+){2}\z`)
 		version := v.TagName
 
 		if semverRegex.MatchString(v.TagName) {
-			trimstr := strings.Trim(v.TagName, "v")
+			trimstr := strings.Trim(v.TagName, "v") /* remove lowercase v */
 			version = trimstr
 		}
 
