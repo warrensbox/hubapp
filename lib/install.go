@@ -63,9 +63,17 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	/* Create local installation directory if it does not exist */
 	CreateDirIfNotExist(installLocation)
 
+	/* identify arch and goos, prepare regex to ignore case */
 	goarch := runtime.GOARCH
+	goarchrgx := "(?i)" + goarch
 	goos := runtime.GOOS
+	goosrgx := "(?i)" + goos
 	urlDownload := ""
+
+	/* some binaries use x86_64 to identify their build instead of amd64 */
+	if goarch == "amd64" {
+		goarchrgx = goarchrgx + "|x86_64"
+	}
 
 	for _, v := range assests {
 
@@ -84,8 +92,8 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 				for _, b := range v.Assets {
 
 					if b.BrowserDownloadURL != "" {
-						matchedOS, _ := regexp.MatchString(goos, b.BrowserDownloadURL)
-						matchedARCH, _ := regexp.MatchString(goarch, b.BrowserDownloadURL)
+						matchedOS, _ := regexp.MatchString(goosrgx, b.BrowserDownloadURL)
+						matchedARCH, _ := regexp.MatchString(goarchrgx, b.BrowserDownloadURL)
 						if matchedOS && matchedARCH {
 							urlDownload = b.BrowserDownloadURL
 							break
