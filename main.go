@@ -15,6 +15,9 @@ package main
 * 7- Create new symlink to binary  `github app`
  */
 
+//TODO
+//rename application
+
 import (
 	"fmt"
 	"os"
