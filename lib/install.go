@@ -158,7 +158,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	ext := filepath.Ext(fileInstalled)
 
 	/* if file is compressed, get extension */
-	if ext == ".gz" || ext == ".tar.gz" || ext == ".gip" {
+	if ext == ".gz" || ext == ".tar.gz" || ext == ".gip" || ext == ".zip" {
 
 		tmpFile := fmt.Sprintf(installLocation+"files_%s", appversion)
 
