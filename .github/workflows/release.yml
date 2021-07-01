@@ -1,8 +1,8 @@
+# Trigger when commits are pushed to the master branch
+
 on:
   push:
     branches:
-      - release
-  pull_request:
       - release
   workflow_dispatch:
 
@@ -39,7 +39,7 @@ jobs:
     #   continue-on-error: true
 
     - name: Go build
-      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp -h
+      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp --help
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.26.0
@@ -47,9 +47,13 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         INITIAL_VERSION: 0.3.0
-        RELEASE_BRANCHES: develop
+        RELEASE_BRANCHES: release
         DEFAULT_BUMP: patch
 
-    - name: Go build
-      run: curl -L https://git.io/goreleaser | VERSION=v0.99.0 bash
-             
+    - name: Install GoReleaser
+      uses: goreleaser/goreleaser-action@v2
+      with:
+        version: latest
+        args: release --rm-dist
+      env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
