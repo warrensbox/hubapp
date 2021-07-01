@@ -10,8 +10,14 @@ on:
 jobs:
   terraform-actions:
     name: Workflow
-    runs-on: circleci/golang:1.16
+    runs-on: ubuntu-latest
     steps:
 
     - name: Checkout Repository
       uses: actions/checkout@master
+
+    - name: Checkout go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.16' # The Go version to download (if necessary) and use.
+      run: go version
