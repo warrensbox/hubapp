@@ -39,7 +39,7 @@ jobs:
     #   continue-on-error: true
 
     - name: Go build
-      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp -h
+      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp --help
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.26.0
@@ -50,6 +50,6 @@ jobs:
         RELEASE_BRANCHES: develop
         DEFAULT_BUMP: patch
 
-    - name: Go build
+    - name: Go build bin
       run: curl -L https://git.io/goreleaser | VERSION=v0.99.0 bash
              
