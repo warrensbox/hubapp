@@ -41,7 +41,7 @@ var CLIENT_ID = "xxx"
 var CLIENT_SECRET = "xxx"
 
 var (
-	//debugFlag   *bool
+	debugFlag   *bool
 	versionFlag *bool
 	helpFlag    *bool
 	action      *string
@@ -59,7 +59,7 @@ func init() {
 		debugFlagDesc   = "Provide debug output"
 	)
 
-	//debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
+	debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
 	versionFlag = kingpin.Flag("version", versionFlagDesc).Short('v').Bool()
 	action = kingpin.Arg("action", actionArgDesc).String()
 	giturl = kingpin.Arg("user/repo", giturlArgDesc).String()
@@ -82,9 +82,9 @@ func main() {
 		fmt.Printf("Version : %s\n", version)
 	}
 
-	// if *debugFlag {
-	// 	log.SetLevel(simplelogger.DEBUG)
-	// }
+	if *debugFlag {
+		log.SetLevel(log.DebugLevel)
+	}
 
 	semverRegex := regexp.MustCompile(`^[a-zA-Z\d-_]*\/[a-zA-Z\d-_]*$`)
 	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
