@@ -11,9 +11,12 @@ builds:
       - linux
     goarch:
       - amd64
-  - ignore:
+    ignore:
       - goos: darwin
         goarch: 386
+      - goos: linux
+        goarch: arm
+        goarm: 7
 checksum:
   name_template: '{{ .ProjectName }}_{{.Env.RELEASE_VERSION}}_checksums.txt'
 changelog:
