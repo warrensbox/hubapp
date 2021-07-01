@@ -1,14 +1,14 @@
+# Trigger when commits are pushed to the master branch
+
 on:
   push:
     branches:
-      - release
-  pull_request:
       - release
   workflow_dispatch:
 
 
 jobs:
-  hubapp-build:
+  hubapp-release:
     name: Release
     runs-on: ubuntu-latest
     steps:
