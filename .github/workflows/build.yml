@@ -46,6 +46,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
-        INITIAL_VERSION: 0.2.0
+        INITIAL_VERSION: 0.3.0
         RELEASE_BRANCHES: develop
+        DEFAULT_BUMP: patch
              
