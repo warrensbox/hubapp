@@ -50,6 +50,11 @@ jobs:
         RELEASE_BRANCHES: release
         DEFAULT_BUMP: patch
 
-    - name: Go build bin
-      run: curl -L https://git.io/goreleaser | VERSION=v0.99.0 bash
+    - name: Install GoReleaser
+      uses: goreleaser/goreleaser-action@v2
+      with:
+        install-only: true
+
+    - name: Show GoReleaser version
+      run: goreleaser -v
              
