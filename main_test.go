@@ -12,7 +12,7 @@ func TestMain(t *testing.T) {
 		func(t *testing.T) {
 			usr, errCurr := user.Current()
 			if errCurr != nil {
-				t.Errorf("Unable to get user %v [unexpected]", errCurr)
+				t.Error(errCurr)
 			}
 
 			if usr != nil {
