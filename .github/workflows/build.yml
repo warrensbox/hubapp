@@ -30,3 +30,6 @@ jobs:
 
     - name: Go path
       run: echo $GOPATH
+
+    - name: Go download
+      run: go mod download
