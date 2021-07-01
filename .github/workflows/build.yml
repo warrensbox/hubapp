@@ -1,4 +1,5 @@
 # Trigger when commits are pushed to the master branch
+
 on:
   push:
     branches:
