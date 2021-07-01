@@ -37,7 +37,7 @@ jobs:
     - name: Go test
       run: go test -v ./...
       continue-on-error: true
-å
+      
     - name: Go build
       run: mkdir -p build && go build -v -o build/hubapp
 
