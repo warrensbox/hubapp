@@ -6,12 +6,10 @@ GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
 CLIENT_ID := $(CLIENT_ID)
 CLIENT_SECRET := $(CLIENT_SECRET)
+LDFLAGS := -X main.version=$(VER) -X main.CLIENT_ID=$(CLIENT_ID) -X main.CLIENT_SECRET=$(CLIENT_SECRET)
 
-$(EXE): Gopkg.lock *.go lib/*.go
+$(EXE): go.mod *.go **/*.go
 	go build -v -ldflags "-X main.version=$(VER) -X main.CLIENT_ID=$(CLIENT_ID) -X main.CLIENT_SECRET=$(CLIENT_SECRET)" -o $@ $(PKG)
-
-Gopkg.lock: Gopkg.toml
-	dep ensure
 
 .PHONY: release
 release: $(EXE) darwin linux
@@ -30,8 +28,8 @@ test: $(EXE)
 	go test -v ./...
 
 
-.PHONEY: dep
-dep:
-	dep ensure
+.PHONEY: mod
+mod:
+	go mod download
 
 
