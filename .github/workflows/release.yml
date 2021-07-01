@@ -1,14 +1,12 @@
 on:
-  push:
-    branches:
-      - release
   pull_request:
+      - release
   workflow_dispatch:
 
 
 jobs:
   hubapp-build:
-    name: Workflow
+    name: Release
     runs-on: ubuntu-latest
     steps:
 
