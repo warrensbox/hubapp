@@ -1,0 +1,55 @@
+on:
+  push:
+    branches:
+      - release
+  pull_request:
+      - release
+  workflow_dispatch:
+
+
+jobs:
+  hubapp-build:
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@master
+
+    - name: Checkout go
+      uses: actions/setup-go@v2
+      with:
+        go-version: '^1.16' # The Go version to download (if necessary) and use.
+
+    - name: Go version
+      id: Version
+      run: go version
+
+    - name: Go ls
+      run: ls
+
+    - name: Go path
+      run: echo $GOPATH
+
+    - name: Go download
+      run: go mod download
+
+    # - name: Go test
+    #   run: go test -v ./...
+    #   continue-on-error: true
+
+    - name: Go build
+      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp -h
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@1.26.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        WITH_V: false
+        INITIAL_VERSION: 0.3.0
+        RELEASE_BRANCHES: develop
+        DEFAULT_BUMP: patch
+
+    - name: Go build
+      run: curl -L https://git.io/goreleaser | VERSION=v0.99.0 bash
+             
