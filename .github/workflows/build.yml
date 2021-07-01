@@ -1,0 +1,17 @@
+# Trigger when commits are pushed to the master branch
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+  workflow_dispatch:
+
+
+jobs:
+  terraform-actions:
+    name: Workflow
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repository
+      uses: actions/checkout@master
