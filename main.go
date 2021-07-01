@@ -25,7 +25,7 @@ import (
 	"strings"
 
 	"github.com/manifoldco/promptui"
-	simplelogger "github.com/mmmorris1975/simple-logger"
+	log "github.com/sirupsen/logrus"
 	"github.com/warrensbox/hubapp/lib"
 	"github.com/warrensbox/hubapp/modal"
 	kingpin "gopkg.in/alecthomas/kingpin.v2"
@@ -41,12 +41,12 @@ var CLIENT_ID = "xxx"
 var CLIENT_SECRET = "xxx"
 
 var (
-	debugFlag   *bool
+	//debugFlag   *bool
 	versionFlag *bool
 	helpFlag    *bool
 	action      *string
 	giturl      *string
-	log         *simplelogger.Logger
+	//log         *simplelogger.Logger
 )
 
 func init() {
@@ -59,14 +59,12 @@ func init() {
 		debugFlagDesc   = "Provide debug output"
 	)
 
-	debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
+	//debugFlag = kingpin.Flag("debug", debugFlagDesc).Short('d').Bool()
 	versionFlag = kingpin.Flag("version", versionFlagDesc).Short('v').Bool()
 	action = kingpin.Arg("action", actionArgDesc).String()
 	giturl = kingpin.Arg("user/repo", giturlArgDesc).String()
 
-	log = simplelogger.StdLogger
-	log.SetLevel(simplelogger.INFO)
-	log.SetFlags(0)
+	log.SetLevel(log.WarnLevel)
 
 }
 
@@ -84,9 +82,9 @@ func main() {
 		fmt.Printf("Version : %s\n", version)
 	}
 
-	if *debugFlag {
-		log.SetLevel(simplelogger.DEBUG)
-	}
+	// if *debugFlag {
+	// 	log.SetLevel(simplelogger.DEBUG)
+	// }
 
 	semverRegex := regexp.MustCompile(`^[a-zA-Z\d-_]*\/[a-zA-Z\d-_]*$`)
 	if semverRegex.MatchString(*giturl) == false && *versionFlag == false {
