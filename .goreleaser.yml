@@ -7,7 +7,6 @@ builds:
     binary: hubapp 
     goos:
       - windows
-      - darwin
       - linux
     goarch:
       - amd64
