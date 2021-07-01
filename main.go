@@ -111,7 +111,7 @@ func main() {
 		_, ghversion, errPrompt := prompt.Run()
 
 		if errPrompt != nil {
-			log.Info("Prompt failed %v\n", errPrompt)
+			log.Infof("Prompt failed %v\n", errPrompt)
 			os.Exit(1)
 		}
 
