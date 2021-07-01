@@ -27,3 +27,6 @@ jobs:
 
     - name: Go ls
       run: ls
+
+    - name: Go path
+      run: echo $GOPATH
