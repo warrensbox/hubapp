@@ -68,3 +68,12 @@ jobs:
         RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
         CLIENT_ID: ${{ secrets.CLIENT_ID }}
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+
+    - name: GH Pages
+      uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material 
+      - run: cd www & mkdocs gh-deploy --force
+
+
