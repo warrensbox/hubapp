@@ -70,10 +70,10 @@ jobs:
         CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
     - name: GH Pages
-      uses: actions/setup-python@v2
+    - uses: actions/setup-python@v2
       with:
         python-version: 3.x
-      run: pip install mkdocs-material 
-      run: cd www & mkdocs gh-deploy --force
+    - run: pip install mkdocs-material 
+    - run: cd www & mkdocs gh-deploy --force
 
 
