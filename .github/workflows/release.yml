@@ -80,7 +80,7 @@ jobs:
         pip install mkdocs-material
 
     - name: Build page   
-      run: cd www & mkdocs gh-deploy --force
+      run: cd www && mkdocs gh-deploy --force
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
