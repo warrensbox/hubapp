@@ -43,16 +43,13 @@ jobs:
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.26.0
+      id: vars
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         INITIAL_VERSION: 0.3.0
         RELEASE_BRANCHES: release
         DEFAULT_BUMP: patch
-
-    - name: Set output
-      id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
 
     - name: Check output
       env:
