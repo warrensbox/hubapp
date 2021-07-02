@@ -8,7 +8,6 @@ builds:
     binary: hubapp
     goos:
       - darwin
-      - netbsd
       - linux
       - windows
     goarch:
