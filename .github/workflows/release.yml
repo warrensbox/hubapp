@@ -75,7 +75,6 @@ jobs:
         python-version: 3.x
 
     - name: Build page   
-      run: pip install mkdocs-material 
-      run: cd www & mkdocs gh-deploy --force
+      run: pip install mkdocs-material && cd www & mkdocs gh-deploy --force
 
 
