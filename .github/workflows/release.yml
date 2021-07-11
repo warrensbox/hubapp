@@ -25,12 +25,6 @@ jobs:
       id: Version
       run: go version
 
-    - name: Go ls
-      run: ls
-
-    - name: Go path
-      run: echo $GOPATH
-
     - name: Go download
       run: go mod download
 
