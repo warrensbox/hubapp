@@ -54,7 +54,7 @@ func init() {
 	const (
 		cmdDesc         = "Install github app binaries on your local machine. Ex: hubapp install mmmorris1975/aws-runas"
 		versionFlagDesc = "Displays the version of hubapp"
-		actionArgDesc   = "Provide action needed. Ex: install, update, or uninstall"
+		actionArgDesc   = "Provide action needed. Ex: install, upgrade, or uninstall"
 		giturlArgDesc   = "Provide giturl in user/repo format. Ex: mmmorris1975/aws-runas"
 		debugFlagDesc   = "Provide debug output"
 	)
