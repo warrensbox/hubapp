@@ -19,15 +19,16 @@ const (
 )
 
 var (
+	homeDir          = os.Getenv("HOME")
 	installFile      = "%s"
 	installVersion   = "%s_"
-	binLocation      = "/usr/local/bin/%s"
+	binLocation      = "%s/.local/bin/%s"
 	installPath      = "/.%s/"
 	installLocation  = "/tmp"
 	installedBinPath = "/tmp"
 )
 
-//Install : Install the provided version in the argument
+// Install : Install the provided version in the argument
 func Install(url string, appversion string, assests []modal.Repo) string {
 
 	/* get current user */
@@ -40,7 +41,7 @@ func Install(url string, appversion string, assests []modal.Repo) string {
 	app := slice[1]
 
 	installPath = fmt.Sprintf(installPath, app)
-	bin := fmt.Sprintf(binLocation, app)
+	bin := fmt.Sprintf(binLocation, homeDir, app)
 
 	installVersion = fmt.Sprintf(installVersion, app)
 	installFile = fmt.Sprintf(installFile, app)
@@ -260,7 +261,7 @@ func GetRecentVersions() ([]string, error) {
 	return nil, nil
 }
 
-//CreateRecentFile : create a recent file
+// CreateRecentFile : create a recent file
 func CreateRecentFile(requestedVersion string) {
 	WriteLines([]string{requestedVersion}, installLocation+recentFile)
 }
