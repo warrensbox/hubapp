@@ -48,7 +48,7 @@ jobs:
         INITIAL_VERSION: 1.0.0
         RELEASE_BRANCHES: master
         DEFAULT_BUMP: patch
-        PRERELEASE: true
+        PRERELEASE: false
         DRY_RUN: false
         VERBOSE: true
 
