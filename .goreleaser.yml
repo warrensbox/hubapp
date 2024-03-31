@@ -29,17 +29,27 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+# archives:
+#   -
+#     name_template: '{{ .ProjectName }}_{{.Env.RELEASE_VERSION}}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+#     replacements:
+#       darwin: darwin
+#       linux: linux
+#       386: 386
+#       amd64: amd64
+#     format_overrides:
+#     - goos: windows
+#       format: zip
+
 archives:
-  -
-    name_template: '{{ .ProjectName }}_{{.Env.RELEASE_VERSION}}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-    replacements:
-      darwin: darwin
-      linux: linux
-      386: 386
-      amd64: amd64
-    format_overrides:
-    - goos: windows
-      format: zip
+  - id: foo
+    name_template: >-
+      {{- .ProjectName }}_
+      {{- title .Os }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end -}}
 brews:
   -
     # Name of the recipe
