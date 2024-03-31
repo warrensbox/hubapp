@@ -32,18 +32,18 @@ jobs:
     #   run: go test -v ./...
     #   continue-on-error: true
 
-    - name: Go build
-      run: mkdir -p build && go build -v -o build/hubapp && build/hubapp --help
+    # - name: Go build
+    #   run: mkdir -p build && go build -v -o build/hubapp && build/hubapp --help
 
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.26.0
-      id: vars
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        WITH_V: false
-        INITIAL_VERSION: 0.4.0
-        RELEASE_BRANCHES: release
-        DEFAULT_BUMP: patch
+    # - name: Bump version and push tag
+    #   uses: anothrNick/github-tag-action@1.26.0
+    #   id: vars
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     WITH_V: false
+    #     INITIAL_VERSION: 0.4.0
+    #     RELEASE_BRANCHES: release
+    #     DEFAULT_BUMP: patch
 
   release:
     runs-on: ubuntu-latest
