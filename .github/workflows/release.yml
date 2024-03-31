@@ -21,7 +21,7 @@ jobs:
         fetch-depth: '0'
 
     - name: Checkout go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v4
       with:
         go-version: '1.16' # The Go version to download (if necessary) and use.
 
@@ -41,7 +41,7 @@ jobs:
 
     - name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.67.0
-      id: vars #test4
+      id: tagging #test4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
@@ -68,30 +68,30 @@ jobs:
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
-    # - name: Install GoReleaser
-    #   uses: goreleaser/goreleaser-action@v2
-    #   with:
-    #     version: latest
-    #     args: release --rm-dist
-    #   env:
-    #     GITHUB_TOKEN: ${{ secrets.GORELEASER_GITHUB_TOKEN }}
-    #     RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
-    #     CLIENT_ID: ${{ secrets.CLIENT_ID }}
-    #     CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+    - name: Install GoReleaser
+      uses: goreleaser/goreleaser-action@v5
+      with:
+        version: latest
+        args: release --rm-dist
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_VERSION: ${{ steps.tagging.outputs.tag }}
+        CLIENT_ID: ${{ secrets.CLIENT_ID }}
+        CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
 
-    # - name: Install Python
-    #   uses: actions/setup-python@v2
-    #   with:
-    #     python-version: 3.x
+    - name: Install Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.x
 
-    # - name: Install dependencies
-    #   run: |
-    #     python -m pip install --upgrade pip
-    #     pip install mkdocs-material
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install mkdocs-material
 
-    # - name: Build page   
-    #   run: cd www && mkdocs gh-deploy --force
-    #   env:
-    #     GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Build page   
+      run: cd www && mkdocs gh-deploy --force
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 
