@@ -20,7 +20,7 @@ builds:
       - 7
     ignore:
       - goos: windows
-        goarch: arm    
+        goarch: arm64    
 checksum:
   name_template: '{{ .ProjectName }}_{{.Env.RELEASE_VERSION}}_checksums.txt'
 changelog:
@@ -58,7 +58,7 @@ brews:
 
   # GitHub/GitLab repository to push the formula to
     # Gitea is not supported yet, but the support coming
-    tap:
+    repository:
       owner: warrensbox
       name: homebrew-tap
 
