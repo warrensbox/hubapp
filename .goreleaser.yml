@@ -104,4 +104,4 @@ brews:
     install: |
       bin.install "hubapp"
 
-    token: "{{ .Env.GORELEASER_GITHUB_TOKEN }}
+    token: "{{ .Env.GORELEASER_GITHUB_TOKEN }}"
