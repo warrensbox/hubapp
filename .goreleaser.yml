@@ -62,11 +62,6 @@ brews:
       owner: warrensbox
       name: homebrew-tap
 
-    # Reporitory to push the tap to.
-    # github:
-    #   owner: warrensbox
-    #   name: homebrew-tap
-
     # Allows you to set a custom download strategy.
     # Default is empty.
     #download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
@@ -108,3 +103,5 @@ brews:
     # Default is 'bin.install "program"'.
     install: |
       bin.install "hubapp"
+
+    token: "{{ .Env.GORELEASER_GITHUB_TOKEN }}
