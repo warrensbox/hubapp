@@ -34,7 +34,7 @@ jobs:
 
     - name: Go test
       run: go test -v ./...
-      continue-on-error: true
+      continue-on-error: false
 
     - name: Go build
       run: mkdir -p build && go build -v -o build/hubapp && build/hubapp --help
@@ -52,23 +52,7 @@ jobs:
         DRY_RUN: false
         VERBOSE: true
 
-  # release:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: write
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - uses: actions/setup-go@v3
-  #       with:
-  #         go-version: 1.16
-  #     - uses: go-semantic-release/action@v1
-  #       with:
-  #         hooks: goreleaser
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-
-    - name: Install GoReleaser
+    - name: Run GoReleaser
       uses: goreleaser/goreleaser-action@v5
       with:
         version: latest
