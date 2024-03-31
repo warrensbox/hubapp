@@ -61,6 +61,7 @@ brews:
     repository:
       owner: warrensbox
       name: homebrew-tap
+      token: "{{ .Env.GORELEASER_GITHUB_TOKEN }}"
 
     # Allows you to set a custom download strategy.
     # Default is empty.
@@ -104,4 +105,4 @@ brews:
     install: |
       bin.install "hubapp"
 
-    token: "{{ .Env.GORELEASER_GITHUB_TOKEN }}"
+    
