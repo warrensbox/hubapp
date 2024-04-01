@@ -6,7 +6,7 @@ on:
     types:
       - closed
     branches:
-      - master
+      - release
 
 
 jobs:
@@ -46,7 +46,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         WITH_V: false
         INITIAL_VERSION: 1.0.0
-        RELEASE_BRANCHES: master
+        RELEASE_BRANCHES: release
         DEFAULT_BUMP: patch
         PRERELEASE: false
         DRY_RUN: false
