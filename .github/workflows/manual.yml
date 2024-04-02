@@ -42,6 +42,7 @@ jobs:
         echo ${{ github.event.inputs.name }} > version
         git config --global user.email "release-bot@tfswitch.com"
         git config --global user.name "release-bot"
+        git checkout master
         git add .
         git commit -m "#{{ github.event.inputs.name }} - Setting semantic version"
         git push
