@@ -11,5 +11,5 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-    - name: Hello Step
+    - name: HELLO test
       run: echo "Hello ${{ github.event.inputs.name }}"
