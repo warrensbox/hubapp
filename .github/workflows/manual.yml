@@ -54,7 +54,7 @@ jobs:
       run: |
         git config --global user.email "release-bot@tfswitch.com"
         git config --global user.name "release-bot"
-        echo ${{ github.event.inputs.name }} > version
+        echo ${{ steps.tagging.outputs.tag }} > version
         git fetch
         git checkout master
         git add .
