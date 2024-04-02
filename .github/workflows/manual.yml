@@ -17,21 +17,21 @@ jobs:
         ref: ${{ github.head_ref }} # required for better experience using pre-releases
         fetch-depth: '0'
 
-    # - name: Checkout go
-    #   uses: actions/setup-go@v4
-    #   with:
-    #     go-version: '1.22' # The Go version to download (if necessary) and use.
+    - name: Checkout go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.22' # The Go version to download (if necessary) and use.
 
-    # - name: Go version
-    #   id: Version
-    #   run: go version
+    - name: Go version
+      id: Version
+      run: go version
 
-    # - name: Go download
-    #   run: go mod download
+    - name: Go download
+      run: go mod download
 
-    # - name: Go test
-    #   run: go test -v ./...
-    #   continue-on-error: false
+    - name: Go test
+      run: go test -v ./...
+      continue-on-error: false
 
     - name: Create release
       run: |
