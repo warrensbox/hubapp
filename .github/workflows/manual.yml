@@ -15,7 +15,7 @@ jobs:
     - name: Check input
       run: |
         echo "Version: ${{ github.event.inputs.name }}"
-        if [ ${{ github.event.inputs.name }} != "major" ] || [ ${{ github.event.inputs.name }} != "minor" ] || [ ${{ github.event.inputs.name }} != "patch" ]; then
+        if [ "${{ github.event.inputs.name }}" != "major" ] || [ "${{ github.event.inputs.name }}" != "minor" ] || [ "${{ github.event.inputs.name }}" != "patch" ]; then
             echo "Error: Provided input string must be 'major', 'minor', or 'patch'"
             exit 1
         fi
