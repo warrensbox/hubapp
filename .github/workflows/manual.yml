@@ -12,6 +12,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: Check input
+      run: |
+        echo "Version: ${{ github.event.inputs.name }}"
+        VERSION=`${{ github.event.inputs.name }}`
+        if [ "$VERSION" != "major" ] || [ "$VERSION" != "minor" ] || [ "$VERSION" != "patch" ]; then
+            echo "Error: Provided string must be 'major', 'minor', or 'patch'"
+            exit 1
+        fi
+
     - uses: actions/checkout@v3
       with:
         ref: ${{ github.head_ref }} # required for better experience using pre-releases
@@ -32,15 +41,6 @@ jobs:
     - name: Go test
       run: go test -v ./...
       continue-on-error: false
-
-    - name: Check input
-      run: |
-        echo "Version: ${{ github.event.inputs.name }}"
-        VERSION=`${{ github.event.inputs.name }}`
-        if [ "$VERSION" != "major" ] || [ "$VERSION" != "minor" ] || [ "$VERSION" != "patch" ]; then
-            echo "Error: Provided string must be 'major', 'minor', or 'patch'"
-            exit 1
-        fi
 
     - name: Create dry run tag
       uses: anothrNick/github-tag-action@1.67.0
