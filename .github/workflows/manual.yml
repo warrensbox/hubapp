@@ -1,0 +1,4 @@
+name: Manual trigger
+
+on:
+  workflow_dispatch:
