@@ -54,9 +54,9 @@ jobs:
       run: |
         git config --global user.email "release-bot@tfswitch.com"
         git config --global user.name "release-bot"
-        echo ${{ steps.tagging.outputs.tag }} > version
-        git fetch
+        git pull
         git checkout master
+        echo ${{ steps.tagging.outputs.tag }} > version
         git add .
         git commit -m "#{{ github.event.inputs.name }} - Setting semantic version"
         git push
