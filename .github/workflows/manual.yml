@@ -71,6 +71,27 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ${{ github.ref }}
 
+      # Push the changes to remote
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: release-${{ steps.semver-tag-dry.outputs.tag }}
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: release-${{ steps.semver-tag-dry.outputs.tag }}
+        title: Release ${{ steps.semver-tag-dry.outputs.tag }}
+        labels: automerge
+
+    - name: Merging release PR
+      run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pull-request-number }}"
+      env:
+        GH_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+
     - name: Create dry run tag
       uses: anothrNick/github-tag-action@1.67.0
       id: semver-tag #test4
