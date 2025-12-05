@@ -5,7 +5,7 @@ go 1.22
 require (
 	github.com/manifoldco/promptui v0.8.0
 	github.com/mholt/archiver v3.1.1+incompatible
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.8.3
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
 
